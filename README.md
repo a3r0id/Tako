@@ -1,0 +1,2 @@
+# tako
+  The beginning of a legacy... Tako is a Twitter bot that selectively retweets/favorites based on Twitter content that the bot finds useful. You can currate Tako's behavior and constraints from a comfortable user-interface that live right in your browser, thanks Tako's websocket server! This is just an alpha release as there are still many bugs and I have many big plans for future Tako releases including but not limited to: stream listeners, sentiment analysis, tweet sheduling and much more!
