@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'BankGothic';
+    src: url('BankGothicRegular.ttf')  format('truetype');
+}
+.main-font{
+   font-family: 'BankGothic', sans-serif;
+}
+
+.ocean{
+    border:4px solid rgba(30, 143, 255, 0.419);
+}
+
+.bar-borders{
+    border: 3px solid rgba(0, 0, 0, 0.2);
+}

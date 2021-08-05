@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>タコ - Tako - タコ</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src='https://cdn.plot.ly/plotly-2.3.0.min.js'></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="top-bar" class="bar-borders"></div>
+
+        <div class="w3-container">
+            <div class="w3-bar">
+                <div class="w3-bar-item">
+                    <img src="./img/tako_panel.png" style="width:72px;height:64px;">
+                </div>
+                <div class="w3-bar-item">
+                    <h1 style="font-weight: 600;" class="main-font">&nbsp;Tako <span style="font-size: small;">(v00.00.20)</span>&nbsp;</h1>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="w3-modal" id="edit-modal">
+            <div class="w3-modal-content" id="edit-modal-content">
+                <div class="bar-borders"></div>
+                <div class="w3-container">
+                    <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Edit Resources</h4>
+                </div>
+                <div class="bar-borders"></div>
+                <div class="w3-container">
+                    <div class="w3-bar-block">
+                        <div class="w3-bar-item">
+                            <select id="edit-select">
+                                <option disabled selected>Select A Resource To Edit</option>
+                                <option value="hashtag">Hashtags</option>
+                                <option value="dropHashtagIfincludes">Drop Interaction If Hashtag Includes</option>
+                                <option value="dropPhrase">Drop Interaction If Tweet Includes</option>
+                            </select>
+                        </div>
+                  
+                        <div class="w3-bar-item" id="editor-anchor"></div>
+       
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+        <div class="w3-modal" id="constraints-modal">
+            <div class="w3-modal-content" id="constraints-modal-content">
+                <div class="bar-borders"></div>
+                <div class="w3-container">
+                    <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Edit Constraints</h4>
+                    <table class="w3-table">
+                        <tr>
+                            <td>
+                                <label style="font-weight: 600;" for="max_dataset_length">Max Dataset Length</label>
+                                <div id="tip-max_dataset_length" class="w3-button">?</div>
+                            </td>
+                            <td>
+                                <input type="text" class="w3-input" id="max_dataset_length">
+                            </td>
+                            <td>
+                                <button type="text" class="w3-button w3-green" id="set-max_dataset_length">Set</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight: 600;" for="interval_time_seconds">Sleep Time (Seconds)</label>
+                                <div id="tip-interval_time_seconds" class="w3-button">?</div>
+                            </td>
+                            <td>
+                                <input type="text" class="w3-input" id="interval_time_seconds">
+                            </td>
+                            <td>
+                                <button type="text" class="w3-button w3-green" id="set-interval_time_seconds">Set</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight: 600;" for="required_retweets">Required Retweets</label>
+                                <div id="tip-required_retweets" class="w3-button">?</div>
+                            </td>
+                            <td>
+                                <input type="text" class="w3-input" id="required_retweets">
+                            </td>
+                            <td>
+                                <button type="text" class="w3-button w3-green" id="set-required_retweets">Set</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight: 600;" for="required_favorites">Required Likes</label>
+                                <div id="tip-required_favorites" class="w3-button">?</div>
+                            </td>
+                            <td>
+                                <input type="text" class="w3-input" id="required_favorites">
+                            </td>
+                            <td>
+                                <button type="text" class="w3-button w3-green" id="set-required_favorites">Set</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="font-weight: 600;" for="query_amount">Tweets Per Query</label>
+                                <div id="tip-query_amount" class="w3-button">?</div>
+                            </td>
+                            <td>
+                                <input type="text" class="w3-input" id="query_amount">
+                            </td>
+                            <td>
+                                <button type="text" class="w3-button w3-green" id="set-query_amount">Set</button>
+                            </td>
+                        </tr>
+                    </table>
+                    </div>
+                    <div class="bar-borders"></div>
+                </div>
+                
+        </div>
+  
+
+        <div class="bar-borders"></div>
+
+
+        <!--BOT STATUS-->
+        <div class="w3-container">
+
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="status-panel-toggle" class="w3-button">+</button>&nbsp;Status</h4>
+
+            <section id="status-panel" hidden>
+                <h4 style="font-size: medium;" class="main-font"><u>Bot:</u>
+                    <span id="bot-status"><span class="w3-yellow">IDLE</span></span>
+                </h4>
+
+                <h4 style="font-size: medium;" class="main-font"><u>Server:</u>
+                    <span id="server-status">NOT CONNECTED</span>
+                </h4>
+
+                <div id="ping-indicator" style="border: 3px solid rgba(0, 0, 0, 0.2);width: auto;"></div>
+
+                <div style="width: 100%;height: 10px;"><!--SPACER--></div>
+            </section>
+        </div>
+
+                <div class="bar-borders"></div>
+
+        <div class="w3-container">
+
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="actions-panel-toggle" class="w3-button">+</button>&nbsp;Session Actions</h4>
+
+            <section id="actions-panel" hidden>
+                <h4 style="font-size: medium;" class="main-font"><u>Likes:</u>
+                    <span id="bot-likes">0</span>
+                </h4>
+
+                <h4 style="font-size: medium;" class="main-font"><u>Retweets:</u>
+                    <span id="bot-rts">0</span>
+                </h4>
+
+                <h4 style="font-size: medium;" class="main-font"><u>API Pulls:</u>
+                    <span id="bot-pulls">0</span>
+                </h4>
+
+                <h4 style="font-size: medium;" class="main-font"><u>Requests (Past 24 Hours):</u>
+                    <span id="requests-last-24">0</span>
+                </h4>
+                
+                <h4 style="font-size: medium;" class="main-font"><u>Efficiency:</u>
+                    <span id="bot-efficiency-avg">0.00%</span>
+                </h4>
+            </section>
+
+        </div>
+
+        <div class="bar-borders"></div>
+
+        <!--BOT CONTROL MAIN-->
+        <div class="w3-bar w3-container">
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="control-panel-toggle" class="w3-button">+</button>&nbsp;Control</h4>
+            
+            <section id="control-panel" hidden>
+                <div class="w3-bar-item">
+                    <button id="botStart" style="background-color: dodgerblue;border-radius: 4px;" class="w3-button w3-green main-font">Start</button>
+                </div>
+                <div class="w3-bar-item">
+                    <button id="botRestart" style="background-color: dodgerblue;color: white;border-radius: 4px;" class="w3-button main-font">Restart</button>
+                </div>
+                <div class="w3-bar-item">
+                    <button id="botStop" style="background-color: dodgerblue;border-radius: 4px;" class="w3-button w3-red main-font">Stop</button>
+                </div>
+                <div class="w3-bar-item">
+                    <button id="edit-toggle" style="background-color: gold;border-radius: 4px;" class="w3-button main-font">Resources</button>
+                </div>
+                <div class="w3-bar-item">
+                    <button id="constraints-toggle" style="background-color: gold;border-radius: 4px;" class="w3-button main-font">Constraints</button>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="bar-borders"></div>
+        <div class="w3-container">
+                 
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="logging-panel-toggle" class="w3-button">+</button>&nbsp;Logging</h4>
+            <section id="logging-panel" hidden>
+                <table id="log-table" class="cell-border"></table>
+            </section>
+
+        </div>
+        <div class="bar-borders"></div>
+        <div class="w3-container">
+                 
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="settings-toggle" class="w3-button">+</button>&nbsp;Settings</h4>
+
+            <section id="settings" hidden>
+                <div class="w3-bar-item w3-container">
+                    <h4 class="main-font"><u>Darkmode</u>
+                        <input type="checkbox" value="1" id="darkmode-tgl">
+                    </h4>
+                </div>
+            </section>
+
+        </div>
+        <div class="bar-borders"></div>
+        <div class="w3-container">
+                 
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="analytics-performance-toggle" class="w3-button">+</button>&nbsp;Analytics - Performance</h4>
+
+            <section id="analytics-performance" hidden>
+                <div id="analytics-automation-keep-rate" style="border: 3px solid rgba(0, 0, 0, 0.2);width: auto;"></div>
+                <div style="width: 100%;height: 10px;"><!--SPACER--></div>
+                <div id="analytics-automation-likes-retweets" style="border: 3px solid rgba(0, 0, 0, 0.2);width: auto;"></div>
+                <div style="width: 100%;height: 10px;"><!--SPACER--></div>
+            </section>
+
+        </div>
+
+        <div class="bar-borders"></div>
+        <div class="w3-container">
+            
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="analytics-interaction-toggle" class="w3-button">+</button>&nbsp;Analytics - Interaction</h4>
+            <section id="analytics-interaction" hidden>
+                <div id="analytics-interaction-followers" class="bar-borders"></div>
+                <div style="width: 100%;height: 10px;"><!--SPACER--></div>
+            </section>
+
+        </div>
+        <div class="bar-borders"></div>
+        <div class="w3-container">
+            
+            <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;<button id="analytics-usage-toggle" class="w3-button">+</button>&nbsp;Analytics - API Usage</h4>
+            <section id="analytics-usage" hidden>
+                <div id="analytics-usage-plot" class="bar-borders"></div>
+                <div style="width: 100%;height: 10px;"><!--SPACER--></div>
+                <div id="analytics-usage-plot-24" class="bar-borders"></div>
+                <div style="width: 100%;height: 10px;"><!--SPACER--></div>
+            </section>
+
+        </div>
+        <div class="bar-borders"></div>
+
+        <!--JS-->
+        <script src="./js/stats.js" async defer></script>
+        <script src="./js/misc.js" async defer></script>
+        <script src="./js/ack.js" async defer></script>
+        <script src="./js/incomingHandlers.js" async defer></script>
+        <script src="./js/ws.js" async defer></script>
+        <script src="./js/pingGauge.js" async defer></script>
+        <script src="./js/lib/notify.min.js" async defer></script>
+        <script src="./js/notifications.js" async defer></script>
+        <script src="./js/plot.js" async defer></script>
+        <script src="./js/events.js" async defer></script>
+        <script src="./js/editBotConstraints.js" async defer></script>
+        <script src="./js/editResources.js" async defer></script>
+        <script src="./js/onReady.js" async defer></script>
+        <script src="./js/darkmode.js" async defer></script>
+        <script src="./js/tooltips.js" async defer></script>
+    </body>
+</html>

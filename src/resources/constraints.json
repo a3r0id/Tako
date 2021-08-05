@@ -1,0 +1,7 @@
+{
+    "max_dataset_length": 150,
+    "interval_time_seconds": 100,
+    "required_retweets": 2,
+    "required_favorites": 2,
+    "query_amount": 80
+}
