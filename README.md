@@ -5,7 +5,7 @@
 
 # Install & Run Tako
 
-> Apply for and receive [Twitter API cridentials](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api). 
+> Apply for and receive [Twitter API credentials](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api). 
 
 > Extract Tako to a comfortable location on your intended device.
 
@@ -39,7 +39,7 @@
 
 > __Drop If Hashtag Includes__: Tako will ignore any Tweet that inludes any of these phrases in any of it's hashtags. (Keeps us from interacting with junk like #100daysofcode etc.). Should ALWAYS be lowercase as each hashtag will be searched in lowercase.
 
-> __Drop If Tweet Includes__: Tako will ignore any Tweet that inludes any of these phrases in any of it's hashtags. (Keeps us from interacting with junk like "check out my onlyfans + cybersecurity + drug shop on the darknet" etc.). Should ALWAYS be lowercase as each tweet will be searched in lowercase.
+> __Drop If Tweet Includes__: Tako will ignore any Tweet that inludes any of these phrases in any of it's hashtags. (Keeps us from interacting with junk like "check out my onlyfans + 100DaysOfCode + drug shop on the darknet" etc...). Should ALWAYS be lowercase as each tweet will be searched in lowercase.
 Issue: Twitter API only includes some of the text of a tweet in API requests, larger tweets may be truncated so this feature is not completely reliable.
 
 ### (Image) Editing Bot Resources
