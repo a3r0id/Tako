@@ -19,9 +19,6 @@
 
 > Confirm that Tako is running from the `Status` section next to `Bot:` is should read `"Running"`.
 
-### (Image) Disconnected from server:
-![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/image.png)
-
 ### (Image) Connected to server and bot running:
 ![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/delete1.png)
 
