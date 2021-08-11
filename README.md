@@ -9,6 +9,8 @@
 
 > Extract Tako to a comfortable location on your intended device.
 
+> Install Pip Requirements `pip install -r requirements.txt`
+
 > Add your intended credentials to `config.json`.
 
 > Run `main.py`.
