@@ -1,0 +1,3 @@
+tweepy==3.10.0
+websockets==8.1
+python_dateutil==2.8.2
