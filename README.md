@@ -114,6 +114,12 @@ Issue: Twitter API only includes some of the text of a tweet in API requests, la
 > Also featuring analytics of your actions such as likes, requests and retweets.
 
 
+# How Tako Works
+
+> Tako is built around [Tweepy](https://www.tweepy.org/) and is presented with a clean, browser-based & user-friendly UI.
+
+> Tako uses a local websocket server/client to pass data to and from the backend. 
+
 ## Known Issues:
 
 > Darkmode is disabled until I can make the time to fix it.
