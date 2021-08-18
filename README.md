@@ -1,34 +1,78 @@
 # Tako (Alpha Release)
-  The beginning of a legacy... Tako is a Twitter bot that selectively retweets/favorites based on Twitter content that the bot finds useful. You can currate Tako's behavior and constraints from a comfortable user-interface that live right in your browser, thanks Tako's websocket server! This is just an alpha release as there are still many bugs and I have many big plans for future Tako releases including but not limited to: stream listeners, sentiment analysis, tweet sheduling and much more!
+  The beginning of a legacy... Tako is a Twitter bot that selectively retweets/favorites based on Twitter content that the bot finds useful. You can currate Tako's behavior and constraints from a comfortable user-interface that live right in your browser, thanks Tako's websocket server! This is just an alpha release as there are still many bugs and I have many big plans for future Tako releases including but not limited to: sentiment/spam analysis and much more!
 
 ![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/tako_panel.png)
 
-# Install & Run Tako
+![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/tako_main.png)
+
+
+# Features
+
+> ### Query Bot
+__Query Bot__ is a conventional Twitter Retweet/Like bot that uses hashtags to search for related Tweets then interacts with them. This is proven method to build a steady following.
+
+> ### Stream Bot
+__Stream Bot__ will follow specific users and interact with their Tweets upon being posted. This is good for interacting with an influencer or your favorite people on Twitter.
+
+> ### Tweet Scheduler
+__Tweet Scheduler__ will post your Tweets at a scheduled time in the future. As long as Tako is running, the Tweet will be posted otherwise it will be posted next time Tako is started.
+
+> ### Analytics
+Tako features some basic analytics which give some insight into Tako's effectiveness and performance.
+
+
+# Initial Steps
 
 > Apply for and receive [Twitter API credentials](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api). 
 
-> Extract Tako to a comfortable location on your intended device.
+> Git install/Extract Tako repository to a comfortable location on your intended runtime device.
 
-> Install Pip Requirements `pip install -r requirements.txt`
+> Update your config (`config.json`) with your valid Twitter API credentials. (Read & write permissions)
+If you'd like to keep your config in a different location than your runtime location then simply add the path of your config to `config_location.txt`, this is where Tako will initially search for your config.
+
+> Move to `/src` and install `requirements.txt`.
+
+
+# Run Tako (Python Excutable Package | Windows 32bit+64bit Release)
+
+> Copy `/release` to your intended runtime location.
+
+> Run Tako!
+
+
+# Build Tako (Python Excutable Package | Cross-Platform)
+
+> Complete initial steps.
+
+> Move to `/src/build_scripts` then run `build_tako.py`.
+This will create a new directory `src/dist` which will contain your build if all went correctly. You can move this folder to any location.
+
+> Update your config file with valid Twitter API credentials.
+Add the location of your `config.json` to `config_location.txt` if you'd like to keep your config somewhere besides Tako's working directory. 
+
+> Run Tako!
+Windows: `Tako.exe` / Unix: `Tako`
+
+
+# Run Tako Conventionally (Script | Cross-Platform)
+
+> Complete initial steps.
 
 > Add your intended credentials to `config.json`.
 
 > Run `main.py`.
 
-> As instructed by `main.py`, double-click `ui.html` to open the user interface.
+> As instructed by `main.py`, double-click `ui.html` to open the user interface in your browser.
 
-> Simply navigate to `Control` then hit `Start`.
 
-> Confirm that Tako is running from the `Status` section next to `Bot:` is should read `"Running"`.
+# Tako Basic Usage
 
-### (Image) Connected to server and bot running:
-![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/delete1.png)
+> To start either of the bot features (query/stream) navigate to `Control` then hit `Start`.
+
+> Confirm that Tako is running from the `Status` section, it should read `"Running"`.
 
 ### (Image) Bot Control
-![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/delete.png)
-
-
-
+![](https://github.com/hostinfodev/cdn/blob/main/img/tako_control.png?raw=true)
 
 # Editing Your Bot
 
@@ -42,7 +86,7 @@
 Issue: Twitter API only includes some of the text of a tweet in API requests, larger tweets may be truncated so this feature is not completely reliable.
 
 ### (Image) Editing Bot Resources
-![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/delete2.png)
+![](https://github.com/hostinfodev/cdn/blob/main/img/tako_resources_hashtags.png?raw=true)
 
 ## Bot Constraints:
 
@@ -56,21 +100,27 @@ Issue: Twitter API only includes some of the text of a tweet in API requests, la
 
 > __Tweets Per Query__: Amount of Tweets to pull during each query, requests can add up quickly so be sure not to set this too high else you could be rate-limited.
 
+> __Max Hashtags__: Max amount of hashtags contained in a single Tweet before we deem it spam and ignore it. 
+
 ### (Image) Editing Bot Constraints
-![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/delete3.png)
+![](https://github.com/hostinfodev/cdn/blob/main/img/tako_constraints.png?raw=true)
 
 
 ## Analytics:
-![](https://github.com/hostinfodev/cdn/blob/main/img/delete5.png?raw=true)
+![](https://github.com/hostinfodev/cdn/blob/main/img/tako_analytics_followers.png?raw=true)
+
+![](https://github.com/hostinfodev/cdn/blob/main/img/tako_analytics_eff.png?raw=true)
+
+> Also featuring analytics of your actions such as likes, requests and retweets.
 
 
 ## Known Issues:
 
-> Sometimes you need to double-click `Start`, I am working on a fix for this.
+> Darkmode is disabled until I can make the time to fix it.
 
-> Once bot is started, Ack ping goes to `1`, this should not be happening...
+> Some of the UI is inconsisten since rewiting the frontend, will fix ASAP.
 
-> Darkmode is not perfect.
+> Font is cool but unfortunately doesn't have proper lowercase letters, changing soon.
 
 
 
