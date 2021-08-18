@@ -12,7 +12,7 @@ try:
 except:
     pass
 
-build_tako   = False
+build_tako   = True
 
 # Assuming we are aren't in VSC or something and are running directly from /build_scripts,
 # script should run from /src.
