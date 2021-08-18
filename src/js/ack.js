@@ -28,23 +28,51 @@ window.ackHandler = (data) =>
     let pingMS = thisAckListener.ping();
     delete acks[data.id];
 
-    window.pingIndicator(pingMS);
+    //window.pingIndicator(pingMS);
 
-    stats.acks          = data.data;
-    stats.likes         = data.likes;
-    stats.retweets      = data.retweets;
-    stats.efficiencyAvg = data.efficiencyAvg;
-    stats.totalPulls    = data.totalPulls;
+    macros.acks          = data.data;
+    macros.likes         = data.likes;
+    macros.retweets      = data.retweets;
+    macros.efficiencyAvg = data.efficiencyAvg;
+    macros.totalPulls    = data.totalPulls;
     
     if (data.isRunning){
         $('#bot-status').html("<span class=\"w3-green\">RUNNING</span>")
     }
     else{
-        $('#bot-status').html("<span class=\"w3-yellow\">IDLE</span>")
+        $('#bot-status').html("<span class=\"w3-yellow\">NOT RUNNING</span>")
     }
 
-    $('#bot-likes').text(stats.likes);
-    $('#bot-rts').text(stats.retweets);
-    $('#bot-pulls').text(stats.totalPulls);
-    $('#bot-efficiency-avg').text(`${stats.efficiencyAvg}%`);
+    if (data.isStreamRunning){
+        $('#stream-status').html("<span class=\"w3-green\">RUNNING</span>")
+    }
+    else{
+        $('#stream-status').html("<span class=\"w3-yellow\">NOT RUNNING</span>")
+    }
+
+    
+
+    let symbol = "-";
+    let dif    = 0;
+    if (pingMS > macros.lastPing){
+        dif    = pingMS - macros.lastPing;
+        symbol = `<span style=\"color: red;\">+${dif}</span>`
+    }
+    else if (pingMS < macros.lastPing){
+        
+        dif    = macros.lastPing - pingMS;
+        symbol = `<span style=\"color: green;\">-${dif}</span>`
+    }
+    if (dif == 0){
+        symbol = "<span>~0</span>"
+    } 
+
+    $("#server-ping").html(`${pingMS}MS (${symbol})`);
+
+    $('#bot-likes').text(macros.likes);
+    $('#bot-rts').text(macros.retweets);
+    $('#bot-pulls').text(macros.totalPulls);
+    $('#bot-efficiency-avg').text(`${macros.efficiencyAvg}%`);
+
+    macros.lastPing = pingMS;
 }

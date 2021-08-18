@@ -32,10 +32,12 @@ const darkMode = () =>
         $('.styleMode')
           .css("color", "green")
           .css("background-color", "black")
+          .css("font-family", "'BankGothic', sans-serif")
 
         $('[aria-controls="log-table"]')
           .css("color", "green")
           .css("background-color", "black")
+          .css("font-family", "'BankGothic', sans-serif")
 
         $('[aria-controls="log-table"]')
             .on('input', ()=>
@@ -45,6 +47,8 @@ const darkMode = () =>
                     $('.dataTables_empty')
                       .css("color", "green")
                       .css("background-color", "black")
+                      .css("font-family", "'BankGothic', sans-serif")
+
                 }, 100)
             })  
     }, 100)
@@ -61,17 +65,20 @@ const lightMode = () =>
 
     $('div')
         .css("background-color", "white")
-        .css("color", "black");
+        .css("color", "black")
+        .css("font-family", "'BankGothic', sans-serif")
 
     setTimeout( ()=>{
 
         $('.styleMode')
           .css("color", "black")
           .css("background-color", "white")
+          .css("font-family", "'BankGothic', sans-serif")
 
         $('[aria-controls="log-table"]')
           .css("color", "black")
           .css("background-color", "white")
+          .css("font-family", "'BankGothic', sans-serif")
 
         $('[aria-controls="log-table"]')
             .on('input', ()=>
@@ -81,6 +88,8 @@ const lightMode = () =>
                     $('.dataTables_empty')
                       .css("color", "black")
                       .css("background-color", "white")
+                      .css("font-family", "'BankGothic', sans-serif")
+
                 }, 100)
             })  
     }, 100)

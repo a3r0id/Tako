@@ -20,4 +20,7 @@ tippy('#tip-query_amount', {
     content: 'The amount of tweets to fetch per query. This shouldn\'t be set too high as you will be rate-limited by Twitter. Range 1-500',
 });
 
+tippy('#tip-max_hashtags', {
+    content: 'The maximum amount of hashtags included in tweets we come across before we ignore them. This keeps us from interacting with spam. Range 1-100',
+});
 

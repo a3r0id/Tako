@@ -1,9 +1,10 @@
 $(document).ready(function()
 {
+    let d = new Date();
     window.logTable = $('#log-table').DataTable({
         autoWidth: false,
         data: [
-            [`[${new Date().toTimeString().split(' ')[0]}] Logging Initialized...`]
+            [`[${d.toTimeString().split(' ')[0]}:${d.getMilliseconds()}] Logging Initialized...`]
         ],
         columns: [
             { title: "Message" },
@@ -39,6 +40,9 @@ $(document).ready(function()
         }
         if (e.target.id == "constraints-modal"){
             $('#constraints-modal').hide();
+        }
+        if (e.target.id == "interactions-modal"){
+            $('#interactions-modal').hide();
         }
     })
 

@@ -5,50 +5,14 @@ from dateutil import parser
 from datetime import datetime, timedelta
 
 from macros import macros
-from misc import checkCache, putCache, keepRate, config
-from json_stuff import getJSON
+from misc import checkCache, putCache, keepRate
 
-"""
-        try:
-            myTweet = glb.myTweets.pop(0)
-            glb.myTweetIndex += 1
-            try:
-                self.api.update_status(myTweet)
-                print("Tweeted status #" + str(glb.myTweetIndex))
-            except Exception as f:
-                print(">>> [ERROR] Failed to Tweet! " + str(f))
-                glb.errs += 1
-                glb.errlist.append(str(f))
-                print(f">>> [TWEETED]: \"{myTweet}\"")
-        except IndexError:
-            print(">>>[NOT TWEETING] - You have no new tweets to post!")
-   
-"""
-  
-class Bot:
+class Bot(object):
     def __init__(self):
-
         self.auth = None
-
-    # Authenticate to Twitter
-    def setAuth(self):
-
-        consumer        = config()['consumer']
-        consumer_secret = config()['consumer_secret']
-        token           = config()['token']
-        token_secret    = config()['token_secret']
-
-        self.auth = tweepy.OAuthHandler(consumer, consumer_secret)
-        self.auth.set_access_token(token, token_secret)
-        self.api = tweepy.API(self.auth)
-
-        macros.Que.log("Authenticated To Twitter Successfully!")
 
     # Run Bot
     def run(self):
-        
-        #Update Auth
-        self.setAuth()
 
         while True:
      
@@ -56,17 +20,14 @@ class Bot:
             if (macros.stopBot == True or macros.isRunning == False):
                 macros.stopBot   = False
                 macros.isRunning = False
+                sleep(1)
                 continue
 
-            if (not self.auth):
-                macros.Que.log("[Error] Auth was not created!")
-                return
-            
             macros.Que.log("[Session] Starting Next Query!")
             
             macros.isQueryRunning = True
             
-            for tweet in tweepy.Cursor(self.api.search, q=(macros.HashTags.toString() + ' -filter:retweets'), lang='en').items(config()['query_amount']):
+            for tweet in tweepy.Cursor(macros.Auth.api.search, q=(macros.HashTags.toString() + ' -filter:retweets'), lang='en').items(macros.Config.get()['query_amount']):
                 
                 ## STOP BOT [Possiblility #2]
                 if (macros.stopBot == True or macros.isRunning == False):
@@ -78,34 +39,53 @@ class Bot:
                 macros.totalPulls += 1
 
                 # Check for dropworthy hashtags
+                tags = 0
                 doDrop = False
                 for hashtag in tweet.entities['hashtags']:
+                    
                     for drop in macros.DropHashtagIfIncludes.get():
                         if drop.lower() in hashtag['text'].lower():
                             doDrop = True
+                    tags += 1
+
+                # CHECK FOR TOO MANY HASHTAGS
+                if tags >= macros.Config.get()['max_hashtags']:
+                    doDrop = True
+
 
                 # Check for overall bad keywords
                 for item in macros.DropPhrases.get():
                     if (item.lower() in tweet.text.lower()):
                         doDrop = True
 
+                #Check cache to see if we have already interacted with this tweet.
                 if checkCache(str(tweet.id)):
                     doDrop = True
 
-                if tweet.retweet_count < config()['required_retweets']:       
+                # Check rt amount
+                if tweet.retweet_count < macros.Config.get()['required_retweets']:       
                     doDrop = True
 
-                if tweet.favorite_count < config()['required_favorites']:       
+                # Check fav amount
+                if tweet.favorite_count < macros.Config.get()['required_favorites']:       
                     doDrop = True
 
+                # If tweet qualifies, interact with it.
                 if not doDrop:
+                    
                     putCache(str(tweet.id))
-                    tweet.retweet()
-                    macros.totalPulls += 1
-                    macros.retweets   += 1
-                    tweet.favorite()
-                    macros.totalPulls += 1
-                    macros.likes      += 1
+
+                    if macros.Config.get()["interaction-like"]:
+                        tweet.favorite()
+                        macros.totalPulls += 1
+                        macros.likes      += 1
+
+                    if macros.Config.get()["interaction-rt"]:
+                        tweet.retweet()
+                        macros.totalPulls += 1
+                        macros.retweets   += 1
+
+
 
             ### POST-QUERY STATS/REVIEW ###########
 
@@ -114,7 +94,7 @@ class Bot:
                 macros.efficiencyAvg = float(keepRate(macros.retweets, macros.totalPulls))
 
             # Check ourself once a query
-            me = self.api.get_user(config()['myHandle'])
+            me = macros.Auth.api.get_user(macros.Config.get()['myHandle'])
             macros.followers = me.followers_count
             macros.totalPulls += 1
 
@@ -124,8 +104,6 @@ class Bot:
             macros.DataSets.Efficiency.add(macros.efficiencyAvg)
             macros.DataSets.TotalPulls.add(macros.totalPulls)
             macros.DataSets.Followers.add(macros.followers)
-
-            # Todo: Monitor totalPulls within a 24hr period!
 
             
             # SEND STATS         
@@ -170,7 +148,8 @@ class Bot:
                 "data": {
                     "type": "totalPulls",
                     "x": [i[0] for i in t],
-                    "y": [i[1] for i in t]
+                    "y": [i[1] for i in t],
+                    "amount": sum([i[1] for i in t])
                 }
             })
             
@@ -193,11 +172,11 @@ class Bot:
             ### END - POST-QUERY STATS/REVIEW ###########
 
             macros.isQueryRunning = False
-            macros.Que.log("Sleeping for %s seconds." % config()['interval_time_seconds'])
+            macros.Que.log("Sleeping for %s seconds." % macros.Config.get()['interval_time_seconds'])
 
         
             # IDLE BUT ALLOW UNIVERSAL STOP BETWEEN SECONDS
-            for _ in range(config()['interval_time_seconds']):
+            for _ in range(macros.Config.get()['interval_time_seconds']):
                 
                 ## STOP BOT [Possiblility #3]
                 if (macros.stopBot == True or macros.isRunning == False):

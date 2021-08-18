@@ -1,7 +1,6 @@
+from stream import spawnStreamThread
 import websockets
 from json import dumps, loads
-
-from misc import config
 from macros import macros
 
 async def server(websocket, path): 
@@ -37,14 +36,42 @@ async def server(websocket, path):
         "data": {
             "type": "constraints",
             "data": {
-                "max_dataset_length": config()['max_dataset_length'],
-                "interval_time_seconds": config()['interval_time_seconds'],
-                "required_retweets": config()['required_retweets'],
-                "required_favorites": config()['required_favorites'],
-                "query_amount": config()['query_amount'],
+                "max_dataset_length": macros.Config.get()['max_dataset_length'],
+                "interval_time_seconds": macros.Config.get()['interval_time_seconds'],
+                "required_retweets": macros.Config.get()['required_retweets'],
+                "required_favorites": macros.Config.get()['required_favorites'],
+                "query_amount": macros.Config.get()['query_amount'],
+                "max_hashtags": macros.Config.get()['max_hashtags'],
+                "interaction-like": macros.Config.get()['interaction-like'],
+                "interaction-rt": macros.Config.get()['interaction-rt']
             }
         }
     }))
+
+    await websocket.send(dumps({
+        "action": "dataUpdate",
+        "data": {
+            "type": "myTweets",
+            "data": macros.MyTweets.get()
+        }
+    }))    
+
+    await websocket.send(dumps({
+        "action": "dataUpdate",
+        "data": {
+            "type": "interactions",
+            "like": macros.Config.get()['interaction-like'],
+            "rt":   macros.Config.get()['interaction-rt']
+        }
+    }))       
+
+    await websocket.send(dumps({
+        "action": "dataUpdate",
+        "data": {
+            "type": "streamFollowing",
+            "data": macros.Stream.get()
+        }
+    }))    
 
     # MESSAGE LOOP
     async for message in websocket:
@@ -68,11 +95,12 @@ async def server(websocket, path):
         # Reset Data Que
         macros.Que.Data.data = []
 
-        if len(macros.Que.logsToSend):
-            for log in macros.Que.logsToSend:
+        if len(macros.Que.Alerts.alerts):
+            for m in macros.Que.Alerts.alerts:
                 await websocket.send(dumps({
                     "action": "alert",
-                    "data": message
+                    "data": m,
+                    "mode": "info"
                 }))
         # Reset Logs Que
         macros.Que.Alerts.alerts = []
@@ -99,6 +127,7 @@ async def server(websocket, path):
                         "id": message['id'],
                         "data": macros.acks,
                         "isRunning": macros.isRunning,
+                        "isStreamRunning": macros.Stream.running,
                         "likes": macros.likes,
                         "retweets": macros.retweets,
                         "efficiencyAvg": macros.efficiencyAvg,
@@ -106,13 +135,6 @@ async def server(websocket, path):
                     }
                 }))
 
-                """
-                {
-                    action: "set",
-                    setter: "dropHashtagIfIncludes",
-                    value: "100daysofcode"
-                }
-                """
             if message['action'] == "set":
 
                 if message['setter'] == "dropHashtagIfincludes":
@@ -131,7 +153,6 @@ async def server(websocket, path):
                 
                 if message['setter'].lower() == "dropphrase":
                     macros.DropPhrases.add(message['value'])
-                    print("Added " + message['value'])
                     await websocket.send(dumps({
                         "action": "alert",
                         "data": "Value Set!"
@@ -158,21 +179,47 @@ async def server(websocket, path):
                         }
                     }))
 
-                """
-                {
-                    action: "remove",
-                    setter: "dropHashtagIfIncludes",
-                    value: "100daysofcode"
-                }
-                """
-
                 if message['setter'] in [i[0] for i in macros.Constraints.selectors]:
                     macros.Constraints.set(message['setter'], message['value'])
                     await websocket.send(dumps({
                         "action": "alert",
                         "data": "Value Set!"
                     }))
+
+                if message['setter'] == "myTweets":
+                    p = loads(message['value'])
+                    macros.MyTweets.add(p)
+
+                    await websocket.send(dumps({
+                        "action": "alert",
+                        "data": "Value Set!"
+                    }))                    
+
+                    await websocket.send(dumps({
+                        "action": "dataUpdate",
+                        "data": {
+                            "type": "myTweets",
+                            "data": macros.MyTweets.get()
+                        }
+                    }))    
+
+                if message['setter'] == "streamFollowing":
+                    macros.Stream.add(message['value'])
                     
+                    await websocket.send(dumps({
+                        "action": "alert",
+                        "data": "Value Set!"
+                    }))   
+
+                    await websocket.send(dumps({
+                        "action": "dataUpdate",
+                        "data": {
+                            "type": "streamFollowing",
+                            "data": macros.Stream.get()
+                        }
+                    }))   
+
+
             if message['action'] == "remove":
     
                 if message['deleter'] == "dropHashtagIfincludes":
@@ -216,18 +263,67 @@ async def server(websocket, path):
                             "type": "HashTags",
                             "data": macros.HashTags.get()
                         }
-                    }))                        
+                    }))     
 
-                
+                if message['deleter'] == "myTweets":
+
+                    macros.MyTweets.remove(int(message['value']))
+
+                    await websocket.send(dumps({
+                        "action": "alert",
+                        "data": "Value Removed!"
+                    }))  
+
+                    await websocket.send(dumps({
+                        "action": "dataUpdate",
+                        "data": {
+                            "type": "myTweets",
+                            "data": macros.MyTweets.get()
+                        }
+                    }))     
+
+                if message['deleter'] == "streamFollowing":
+
+                    macros.Stream.remove(message['value'])
+
+                    await websocket.send(dumps({
+                        "action": "alert",
+                        "data": "Value Removed!"
+                    }))  
+
+                    await websocket.send(dumps({
+                        "action": "dataUpdate",
+                        "data": {
+                            "type": "streamFollowing",
+                            "data": macros.Stream.get()
+                        }
+                    }))                      
+
+            # START STREAM BOT
+            if message['action'] == "startStream":
+                if not macros.Stream.running:
+                    spawnStreamThread()
+                    
+            # STOP STREAM BOT
+            if message['action'] == "stopStream":
+                del macros.Stream.currentStream
+                macros.Stream.currentStream = None
+                macros.Que.log("[Stream] Killing Stream...")
+                macros.Stream.running = False      
+
+            if message['action'] == "reAuth":
+                macros.Auth.set() 
+                macros.Que.log("[Auth] Re-Auth to Twitter API was succesfull!")
+                macros.Que.Alerts.alert("[Auth] Re-Auth to Twitter API was succesfull!")
                 
                                 
 
 # Create server object
 start_server = websockets.serve(
     server,
-    "127.0.0.1",
-    8401,
-    max_size=9000000,
+    macros.Config.get()['server_adapter'],
+    macros.Config.get()['server_port'],
+    max_size=macros.Config.get()['server_max_buffer'],
     ping_timeout=None
     )
 

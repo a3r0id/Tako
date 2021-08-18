@@ -2,10 +2,11 @@
 let constraintSelectors = [
     // [selector, isInt, [int, range]]
     ["max_dataset_length", true, [25, 1000]],
-    ["interval_time_seconds", true, [10, 300]],
+    ["interval_time_seconds", true, [10, 500]],
     ["required_retweets", true, [0, 10000000]],
     ["required_favorites", true, [0, 10000000]],
-    ["query_amount", true, [1, 500]]
+    ["query_amount", true, [1, 500]],
+    ["max_hashtags", true, [1, 100]]
 ];
 
 for (let selector of constraintSelectors)
@@ -23,13 +24,16 @@ for (let selector of constraintSelectors)
                 return;
             }
         }
-        window.sock.send(JSON.stringify(
+        let message = JSON.stringify(
             {
                 action: "set",
                 setter: selector[0],
                 value: value
             }
-        ));
+        );
+
+        window.sock.send(message);
+        window.SocketLog.log(message);
     })
 }
 

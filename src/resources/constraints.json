@@ -3,5 +3,8 @@
     "interval_time_seconds": 100,
     "required_retweets": 2,
     "required_favorites": 2,
-    "query_amount": 80
+    "query_amount": 80,
+    "max_hashtags": 10,
+    "interaction-like": true,
+    "interaction-rt": true
 }

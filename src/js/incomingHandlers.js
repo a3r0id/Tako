@@ -8,64 +8,84 @@ const incomingHandlers =
         {
 
             case 'dropRate':
-                stats.dropRate.x = window.utcArrayToLocal(data.x);
-                stats.dropRate.y = data.y;
+                macros.dropRate.x = window.utcArrayToLocal(data.x);
+                macros.dropRate.y = data.y;
                 window.updatePerformanceAnalytics();
                 delete data;
                 break;
 
             case 'likesAndRetweets':
-                stats.likesAndRetweets.x          = window.utcArrayToLocal(data.x);
-                stats.likesAndRetweets.y.likes    = data.likes;
-                stats.likesAndRetweets.y.retweets = data.retweets;
+                macros.likesAndRetweets.x          = window.utcArrayToLocal(data.x);
+                macros.likesAndRetweets.y.likes    = data.likes;
+                macros.likesAndRetweets.y.retweets = data.retweets;
                 window.updateLikeRetweets();
                 delete data;
                 break;
 
             case 'followers':
-                stats.followers.x = window.utcArrayToLocal(data.x);
-                stats.followers.y = data.y;
+                macros.followers.x = window.utcArrayToLocal(data.x);
+                macros.followers.y = data.y;
                 window.updateFollowers();
                 delete data;
                 break;
 
             case 'totalPulls':
-                stats.totalPullsSet.x = window.utcArrayToLocal(data.x);
-                stats.totalPullsSet.y = data.y;
+                macros.totalPullsSet.x      = window.utcArrayToLocal(data.x);
+                macros.totalPullsSet.y      = data.y;
+                macros.totalPullsSet.amount = data.amount;
                 window.updateUsage();
                 delete data;
                 break;
 
             case 'totalPulls24':
-                stats.totalPullsLast24.x      = data.x;
-                stats.totalPullsLast24.y      = data.y;
-                stats.totalPullsLast24.amount = data.amount;
+                macros.totalPullsLast24.x      = data.x;
+                macros.totalPullsLast24.y      = data.y;
+                macros.totalPullsLast24.amount = data.amount;
                 $('#requests-last-24').html(data.amount);
                 window.updateUsageLast24(data.x, data.y);
                 delete data;
                 break;
 
             case 'dropHashtagIfIncludes':
-                stats.resources.dropHashtagIfIncludes = data.data;
+                macros.resources.dropHashtagIfIncludes = data.data;
                 updateEditor("drophashtagifincludes", data.data);
                 delete data;
                 break;
  
             case 'DropPhrases':
-                stats.resources.DropPhrases = data.data;
+                macros.resources.DropPhrases = data.data;
                 updateEditor("dropphrase", data.data);
                 delete data;
                 break;
 
             case 'HashTags':
-                stats.resources.HashTags = data.data;
+                macros.resources.HashTags = data.data;
                 updateEditor("hashtag", data.data);
                 delete data;
                 break;
 
             case 'constraints':
-                stats.constraints = data.data;
+                macros.constraints = data.data;
                 updateConstraints(data.data);
+                delete data;
+                break;
+
+            case 'myTweets':
+                macros.myTweets = data.data;
+                window.buildTweetScheduler();
+                delete data;
+                break;
+
+            case 'interactions':
+                macros.interactions_like = data.like;
+                macros.interactions_rt   = data.rt;
+                window.updateInteractions();
+                delete data;
+                break;
+            
+            case 'streamFollowing':
+                macros.streamFollowing = data.data;
+                window.StreamEditor.updateStream();
                 delete data;
                 break;
 
@@ -74,9 +94,10 @@ const incomingHandlers =
         }
     },
     logging: (data) => {
-        stats.logs.push(`[${new Date().toTimeString().split(' ')[0]}] ${data}`);
+        let d = new Date();
+        macros.logs.push(`[${d.toTimeString().split(' ')[0]}:${d.getMilliseconds()}] ${data}`);
         let buffer = [];
-        for (let l of stats.logs){
+        for (let l of macros.logs){
             buffer.push([l])
         }
         window.updateLogsView(buffer)

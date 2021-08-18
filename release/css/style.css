@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'BankGothic';
+    src: url('BankGothicRegular.ttf')  format('truetype');
+}
+
+::-webkit-scrollbar{
+    width: 13px;
+    height: 13px;
+    }
+    ::-webkit-scrollbar-thumb{
+    background: linear-gradient(180deg, #000000 30%,#1E90FF 70%);
+    border: 1.7px ridgergba(0, 0, 0, 0.2);
+    border-radius: 0px;
+    }
+    ::-webkit-scrollbar-thumb:hover{
+    background: #1E90FF;
+    }
+    ::-webkit-scrollbar-track{
+    background: #F0F0F0;
+    border: 1px outset rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+    }
+
+
+.main-font{
+   font-family: 'BankGothic', sans-serif;
+}
+
+.ocean{
+    border:4px solid rgba(30, 143, 255, 0.419);
+}
+
+.bar-borders{
+    border: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+.spacer-5{
+    width: 100%;
+    height: 5px;
+}
+
+.soft-border-bottom{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.180);
+}
+
+.soft-border-top{
+    border-top: 1px solid rgba(0, 0, 0, 0.180);
+}
+
+.soft-border{
+    border: 1px solid rgba(0, 0, 0, 0.180);
+}
+
+.soft-border-bottom-table > tbody > tr > td{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.soft-border-bottom-table > tbody > tr > th{
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.main-section-borders{
+    border-left: 1px solid rgba(0, 0, 0, 0.180);
+    border-top: 1px solid rgba(0, 0, 0, 0.180);
+}
+
+.soft{
+    background-color: rgba(0, 0, 0, 0.419);
+}
+
+.analytics-panels{
+    width: 100%;
+    height: 600px;
+}
+
+.bluack-gradient{
+    background: linear-gradient(150deg, #000000cb 28%,#1E90FF 77%);
+}

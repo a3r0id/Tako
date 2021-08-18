@@ -55,7 +55,13 @@ plot = (divId, traces, title, xAxis={}, yAxis={}, legend={}) => {
         title: title,
         xaxis: xAxis,
         yaxis: yAxis,
-        legend: legend
+        legend: legend,
+        plot_bgcolor: 'black',
+        paper_bgcolor: 'black',
+        font: {
+            size: 10,
+            color: 'white'
+        }
     };
 
     Plotly.newPlot(divId, traces, layout);
@@ -63,8 +69,8 @@ plot = (divId, traces, title, xAxis={}, yAxis={}, legend={}) => {
 }
 
 window.updatePerformanceAnalytics = () => {
-    let x = stats.dropRate.x;
-    let y = stats.dropRate.y;
+    let x = macros.dropRate.x;
+    let y = macros.dropRate.y;
     plot("analytics-automation-keep-rate", [rtTrace = new Trace(
         x,
         y,
@@ -84,8 +90,8 @@ window.updateLikeRetweets = () =>
 {
 
     likesTrace = new Trace(
-        stats.likesAndRetweets.x,
-        stats.likesAndRetweets.y.likes,
+        macros.likesAndRetweets.x,
+        macros.likesAndRetweets.y.likes,
         "Likes",
         "line",
         mode="markers",
@@ -95,8 +101,8 @@ window.updateLikeRetweets = () =>
     ).get();
 
     retweetsTrace = new Trace(
-        stats.likesAndRetweets.x,
-        stats.likesAndRetweets.y.retweets,
+        macros.likesAndRetweets.x,
+        macros.likesAndRetweets.y.retweets,
         "Retweets",
         "line",
         mode="markers",
@@ -114,8 +120,8 @@ window.updateLikeRetweets();
 window.updateFollowers = () => {
 
     plot("analytics-interaction-followers", [followersTrace = new Trace(
-        stats.followers.x,
-        stats.followers.y,
+        macros.followers.x,
+        macros.followers.y,
         "Retweets",
         "line",
         mode="markers",
@@ -132,36 +138,32 @@ window.updateFollowers();
 window.updateUsage = () => {
 
     plot("analytics-usage-plot", [followersTrace = new Trace(
-        stats.totalPullsSet.x,
-        stats.totalPullsSet.y,
-        "API Usage (Requests)",
+        macros.totalPullsSet.x,
+        macros.totalPullsSet.y,
+        "API Usage (Requests) | " + macros.totalPullsSet.amount + " Total",
         "line",
         mode="markers",
         [],
         {color: 'rgb(55, 55, 255)', width: 1},
         {color: 'rgb(55, 55, 255)', size: 12}
-    ).get()], "Requests (Total)");
+    ).get()], "Requests (Total) | " + macros.totalPullsSet.amount + " Total");
 
 }
 
 window.updateUsage();
 
-
 window.updateUsageLast24 = (x, y) =>
 {
-    console.log("TEST2");
-    console.log(x);
-    console.log(y);
     plot("analytics-usage-plot-24", [followersTrace = new Trace(
         x,
         y,
-        "Today's API Usage (Requests)",
+        "Today's API Usage (Requests) | " + macros.totalPullsLast24.amount + " Total",
         "line",
         mode="markers",
         [],
         {color: 'rgb(55, 55, 255)', width: 1},
         {color: 'rgb(55, 55, 255)', size: 12}
-    ).get()], "Requests (24 Hours)");
+    ).get()], "Requests (24 Hours) | " + macros.totalPullsLast24.amount + " Total");
 }
 
-window.updateUsageLast24(stats.totalPullsLast24.x, stats.totalPullsLast24.y);
+window.updateUsageLast24(macros.totalPullsLast24.x, macros.totalPullsLast24.y);

@@ -1,8 +1,15 @@
-
 from datetime import datetime
 from os.path import isfile
+from json import dump, load
 
-from json_stuff import getJSON
+def setJSON(obj, file):
+    with open(file, "w+") as f:
+        dump(obj, f, indent=4)
+
+def getJSON(file):
+    with open(file) as f:
+        return load(f)
+
 
 def noww(): return str(datetime.now())
 
@@ -16,6 +23,12 @@ def today():
 if not isfile("intrinsics/interactions.cache"):
     with open("intrinsics/interactions.cache", "w+") as f:
         pass
+else:
+    with open("intrinsics/interactions.cache", "r") as fr:
+        r = fr.read()
+    if (len(r) > 2048):    
+        with open("intrinsics/interactions.cache", "w+") as f:
+                f.write(r[round(len(r) / 2):len(r)])
 
 def putCache(tweetID):
     with open("intrinsics/interactions.cache", "a") as f:
@@ -25,12 +38,4 @@ def checkCache(tweetID):
     # Return false if tweet not interacted with yet.
     with open("intrinsics/interactions.cache", "r") as f:
         return tweetID in f.read()    
-
-def config():
-    # COMBINES CONSTRAINTS + CONFIG
-    buf         = getJSON("config.json")
-    constraints = getJSON("resources/constraints.json")
-    for key, value in constraints.items():
-        buf[key] = value
-    return buf
 

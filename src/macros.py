@@ -1,21 +1,26 @@
 from datetime import datetime
-
-from json_stuff import getJSON, setJSON
-from misc import config
+from misc import getJSON, setJSON
+from validation import Config
+from tweepy import OAuthHandler, API
 
 # MAIN MACROS
 class macros:
 
-    botLoopStarted = False
-    isQueryRunning = False
-    isRunning      = False
-    stopBot        = False
-    followers      = 0
-    retweets       = 0
-    likes          = 0
-    acks           = 0
-    totalPulls     = 0
-    efficiencyAvg  = 0.00
+    # CHECKS FOR CONFIG FILE AND SOME BASIC VALIDATIONS
+    configLocation  = Config.check()
+
+    botLoopStarted  = False
+    isQueryRunning  = False
+    isRunning       = False
+    stopBot         = False
+    streamIsRunning = False
+    stopStream      = False
+    followers       = 0
+    retweets        = 0
+    likes           = 0
+    acks            = 0
+    totalPulls      = 0
+    efficiencyAvg   = 0.00
     
     class Que:
 
@@ -120,8 +125,8 @@ class macros:
             def add(data):
                 buff = getJSON("datasets/efficiency.json")
                 buff.append([str(datetime.now()), data])
-                if len(buff) > config()['max_dataset_length']:
-                    buff = buff[ :config()['max_dataset_length'] ]
+                if len(buff) > macros.Config.get()['max_dataset_length']:
+                    buff.pop(0)
                 setJSON(buff, "datasets/efficiency.json")
 
 
@@ -135,8 +140,8 @@ class macros:
             def add(likes, retweets):
                 buff = getJSON("datasets/likes&retweets.json")
                 buff.append([str(datetime.now()), {"likes": likes, "retweets": retweets}])
-                if len(buff) > config()['max_dataset_length']:
-                    buff = buff[ :config()['max_dataset_length'] ]
+                if len(buff) > macros.Config.get()['max_dataset_length']:
+                    buff.pop(0)
                 setJSON(buff, "datasets/likes&retweets.json")
 
 
@@ -150,11 +155,9 @@ class macros:
             def add(data):
                 buff = getJSON("datasets/followers.json")
                 buff.append([str(datetime.now()), data])
-                if len(buff) > config()['max_dataset_length']:
-                    buff = buff[ :config()['max_dataset_length'] ]
+                if len(buff) > macros.Config.get()['max_dataset_length']:
+                    buff.pop(0)
                 setJSON(buff, "datasets/followers.json")
-
-
 
         class TotalPulls:
             
@@ -166,24 +169,99 @@ class macros:
             def add(data):
                 buff = getJSON("datasets/totalPulls.json")
                 buff.append([str(datetime.now()), data])
-                if len(buff) > config()['max_dataset_length']:
-                    buff = buff[ :config()['max_dataset_length'] ]
+                if len(buff) > macros.Config.get()['max_dataset_length']:
+                    buff.pop(0)
                 setJSON(buff, "datasets/totalPulls.json")
         
     class Constraints:
+        @staticmethod
+        def get():
+            return getJSON("resources/constraints.json")
+
         selectors = [
                 ["max_dataset_length", int],
                 ["interval_time_seconds", int],
                 ["required_retweets", int],
                 ["required_favorites", int],
-                ["query_amount", int]
+                ["query_amount", int],
+                ["max_hashtags", int],
+                ["interaction-like", bool],
+                ["interaction-rt", bool]
             ]
-        def set(key, value):
 
-            configBuffer = config()
-            buf = {}
-            for k in macros.Constraints.selectors:
-                buf[k[0]] = configBuffer[k[0]]
-            buf[key] = k[1](value)
-            setJSON(buf, "resources/constraints.json")
+        def set(key, value):
+            for i in macros.Constraints.selectors:
+                if i[0] == key:
+                    constraints = macros.Constraints.get()
+                    constraints[key] = i[1](value)
+                    setJSON(constraints, "resources/constraints.json")
+
+    class MyTweets:
+
+        @staticmethod
+        def get():
+            return getJSON("resources/scheduledTweets.json") 
                 
+        @staticmethod
+        def add(data):
+            b = getJSON("resources/scheduledTweets.json")
+            b.append(data)
+            setJSON(b, "resources/scheduledTweets.json")
+
+        @staticmethod
+        def remove(index):
+            buff = getJSON("resources/scheduledTweets.json")
+            del buff[index]
+            setJSON(buff, "resources/scheduledTweets.json")
+
+    class Stream:
+        start         = False
+        running       = False
+        currentStream = None
+    
+        @staticmethod
+        def get():
+            return getJSON("resources/streamFollowing.json") 
+                
+        @staticmethod
+        def add(data):
+            b = getJSON("resources/streamFollowing.json")
+            b.append(data)
+            setJSON(b, "resources/streamFollowing.json")
+
+        @staticmethod
+        def remove(handle):
+            buff = getJSON("resources/streamFollowing.json")
+            buff = [i for i in buff if i != handle]
+            setJSON(buff, "resources/streamFollowing.json")
+
+
+    class Config:
+
+        @staticmethod        
+        def get():
+            # COMBINES CONSTRAINTS + CONFIG
+            buf         = getJSON(macros.configLocation)
+            constraints = getJSON("resources/constraints.json")
+            
+            # MERGE BOTH JSON FILES
+            for key, value in constraints.items():
+                buf[key] = value
+
+            return buf
+
+    class Auth:
+
+        auth = None
+        api  = None
+
+        @staticmethod
+        def set():
+            macros.Auth.auth        = OAuthHandler(macros.Config.get()['consumer'], macros.Config.get()['consumer_secret'])
+            macros.Auth.auth.set_access_token(macros.Config.get()['token'], macros.Config.get()['token_secret'])
+            macros.Auth.auth.secure = True
+            macros.Auth.api         = API(macros.Auth.auth)    
+            #macros.Que.Alerts.alert("Authed To Twitter Successfully!")      
+
+
+

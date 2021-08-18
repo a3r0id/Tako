@@ -1,4 +1,4 @@
-window.notify = (message) =>
+window.notify = (message, mode="success") =>
 {
 
     $('.data-notify-text').css("font-family", "'Oswald', sans-serif");
@@ -25,7 +25,8 @@ window.notify = (message) =>
         {
             position:"bottom center",
             arrowShow: false,
-            clickToHide: true
+            clickToHide: true,
+            className: mode
         }
     );
 };
@@ -35,8 +36,19 @@ let ttt = () => {
     if ( $('.notifyjs-wrapper').is(':visible') )
     {
         $('.notifyjs-wrapper').css("margin", "0 auto");
+        $('.notifyjs-wrapper').css("z-index", "5");
     }
     setTimeout(ttt, 100);
 };
 
 setTimeout(ttt, 100);
+
+const heightInit = $(document.body).height();
+let notificationsAnchorAdjust = () => {
+    let height = $(document.body).height();
+    if ( height > heightInit){
+        $('#top-bar').css("height", `${height - heightInit}px`)
+    }
+    setTimeout(notificationsAnchorAdjust, 100);
+}
+notificationsAnchorAdjust();
