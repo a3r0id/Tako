@@ -140,13 +140,13 @@ window.updateUsage = () => {
     plot("analytics-usage-plot", [followersTrace = new Trace(
         macros.totalPullsSet.x,
         macros.totalPullsSet.y,
-        "API Usage (Requests) | " + macros.totalPullsSet.amount + " Total",
+        "API Usage (Requests)",
         "line",
         mode="markers",
         [],
         {color: 'rgb(55, 55, 255)', width: 1},
         {color: 'rgb(55, 55, 255)', size: 12}
-    ).get()], "Requests (Total) | " + macros.totalPullsSet.amount + " Total");
+    ).get()], "Requests (Total)");
 
 }
 
@@ -157,13 +157,13 @@ window.updateUsageLast24 = (x, y) =>
     plot("analytics-usage-plot-24", [followersTrace = new Trace(
         x,
         y,
-        "Today's API Usage (Requests) | " + macros.totalPullsLast24.amount + " Total",
+        "Today's API Usage (Requests)",
         "line",
         mode="markers",
         [],
         {color: 'rgb(55, 55, 255)', width: 1},
         {color: 'rgb(55, 55, 255)', size: 12}
-    ).get()], "Requests (24 Hours) | " + macros.totalPullsLast24.amount + " Total");
+    ).get()], "Requests (24 Hours)");
 }
 
 window.updateUsageLast24(macros.totalPullsLast24.x, macros.totalPullsLast24.y);
