@@ -3,6 +3,11 @@
     src: url('BankGothicRegular.ttf')  format('truetype');
 }
 
+@font-face {
+    font-family: 'Rajdhani';
+    src: url('Rajdhani.woff2') format('woff2');
+}
+
 ::-webkit-scrollbar{
 width: 13px;
 height: 13px;
@@ -22,12 +27,28 @@ box-shadow: inset 0px 0px 0px 0px #F0F0F0;
 }
 
 
+html, body, h1, h2, h3, h4, h5, span, a, i, u, th, td, select{
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 1px;
+}
+
+/*
+Redundant class since google chromium is being fucking rediculous :o!!!!!!!!
+*/
 .main-font{
-   font-family: 'BankGothic', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 1px;
+}
+
+.tako-font{
+    font-family: 'BankGothic', sans-serif;
+    letter-spacing: 4px;
 }
 
 .ocean{
-    border:4px solid rgba(30, 143, 255, 0.419);
+    border: 4px solid rgba(30, 143, 255, 0.419);
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 1px;
 }
 
 .bar-borders{

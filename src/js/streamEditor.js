@@ -6,7 +6,7 @@ window.StreamEditor = {
             $('#streamHandlesBlock').append(`
             <div class="w3-bar-item">
                 <button onclick="window.StreamEditor.remove('${stat}')" class="w3-red w3-button">
-                ✕</button><span>${stat}</span>
+                ✕</button>&nbsp;<span>${stat}</span>
             </div>
             `);
             i++;

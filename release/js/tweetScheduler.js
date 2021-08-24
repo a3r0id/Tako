@@ -29,16 +29,16 @@ window.tweetScheduler =
 
 window.buildTweetScheduler = () => {
     let widget = $('#tweet-scheduler-widget');
-    let buffer = "<div class=\"w3-container\"> <h3>My Tweets</h3> <table> ";
+    let buffer = "<div class=\"w3-container\"> <h3 class=\"main-font\">My Tweets</h3> <table> ";
     let index  = 0;
     for (let tweet of macros.myTweets){
         buffer += `
-        <tr>
+        <tr class="main-font">
             <td>
             <button id="myTweetDelete${index}" class="w3-button w3-red">✕</button> <span>Scheduled for ${tweet.time}</span>
             <td>
         </tr>
-        <tr>
+        <tr class="main-font">
             <td>
                 <div class="w3-input">${tweet.tweet}</div>
             </td>
@@ -54,18 +54,18 @@ window.buildTweetScheduler = () => {
     
     <div class="w3-container">
         
-        <h3>Add A Tweet</h3>
+        <h3 class="main-font">Add A Tweet</h3>
 
         <div class="w3-bar">
             <div class="w3-bar-item">
-                <button class="w3-button w3-green" id="addToMyTweets">Save</button>
+                <button class="w3-button w3-green main-font" id="addToMyTweets">Save</button>
             </div>
             <div class="w3-bar-item">
-                <input type="text" id="myTimePickerTweets" class="w3-button w3-blue" style="color:white;" placeholder="Select Time">
+                <input type="text" id="myTimePickerTweets" class="w3-button w3-blue main-font" style="color:white;" placeholder="Select Time">
             </div>
         </div>
 
-        <div class="w3-container">
+        <div class="w3-container main-font">
             <div style="width: 100%;height: 25px;"></div>
             <textarea id="myTweetText">Hello World!</textarea>
         </div>

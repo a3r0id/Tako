@@ -24,11 +24,11 @@
         <link rel="stylesheet" href="https://www.jqueryscript.net/demo/json-collapsible-tree/css/simpleJson.css">
 
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-        html,body,h1,h2,h3,h4,h5 {font-family: 'BankGothic', sans-serif;}
-        </style>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
 
     </head>
     <body>
@@ -42,7 +42,7 @@
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
     <span class="w3-bar-item w3-right" style="font-size: large;color: white;">
       <img src="img/tako_panel.png" style="height:14px;">
-      Tako</span>
+      <span class="tako-font">Tako</span></span>
   </div>
 
 <div class="w3-top" id="top-bar" style="z-index:5;background-color: transparent;z-index: -1;"></div>
@@ -56,7 +56,7 @@
       </div>
 
       <div class="w3-col s8 w3-bar">
-        <span style="font-size: x-small;text-align: center;">&nbsp;&nbsp;&nbsp;Tako (Dev.) V00.00.02</span><br>
+        <span style="font-size: x-small;text-align: center;">&nbsp;&nbsp;&nbsp;Tako (Dev.) V00.00.022</span><br>
         <a href="https://github.com/hostinfodev/tako/blob/main/README.md#tako-basic-usage" target="_blank" class="w3-bar-item w3-button"><i class="fa fa-question-circle"></i></a>
         <a href="https://github.com/hostinfodev/tako" target="_blank" class="w3-bar-item w3-button"><i style="color: rgba(128, 0, 128, 0.57);" class="fa fa-github"></i></a>
         <a href="https://twitter.com/" id="go-to-twitter" target="_blank" class="w3-bar-item w3-button"><i style="color: dodgerblue;" class="fa fa-twitter"></i></a>
@@ -68,13 +68,13 @@
     </div>
     <div class="w3-bar-block">
       <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black main-font" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding w3-blue main-font nav-tog" id="home"><i class="fa fa-home fa-fw"></i>  Overview</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding main-font nav-tog" id="control-panel-toggle"><i class="fa fa-wrench fa-fw"></i>  Control</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding main-font nav-tog" id="logging-panel-toggle"><i class="fa fa-book fa-fw"></i>  Logging</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding main-font nav-tog" id="settings-toggle"><i class="fa fa-gear fa-fw"></i>  Settings</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding main-font nav-tog" id="tweet-scheduler-toggle"><i class="fa fa-calendar fa-fw"></i>  Scheduler</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding main-font nav-tog" id="stream-toggle" ><i class="fa fa-rss-square fa-fw"></i>  Stream</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding main-font nav-tog" id="diagnostics-toggle" ><i class="fa fa-stethoscope fa-fw"></i>  Diagnostics</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding w3-blue nav-tog" id="home"><i class="fa fa-home fa-fw"></i>  Overview</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding nav-tog" id="control-panel-toggle"><i class="fa fa-wrench fa-fw"></i>  Control</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding nav-tog" id="logging-panel-toggle"><i class="fa fa-book fa-fw"></i>  Logging</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding nav-tog" id="settings-toggle"><i class="fa fa-gear fa-fw"></i>  Settings</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding nav-tog" id="tweet-scheduler-toggle"><i class="fa fa-calendar fa-fw"></i>  Scheduler</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding nav-tog" id="stream-toggle" ><i class="fa fa-rss-square fa-fw"></i>  Stream</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding nav-tog" id="diagnostics-toggle" ><i class="fa fa-stethoscope fa-fw"></i>  Diagnostics</a>
     </div>
   </nav>
   
@@ -98,7 +98,7 @@
             <h3><span id="bot-likes">0</span></h3>
           </div>
           <div class="w3-clear"></div>
-          <h4>Likes</h4>
+          <h4 class="main-font" style="letter-spacing: 3px;">Likes</h4>
         </div>
       </div>
       <div class="w3-quarter">
@@ -108,7 +108,7 @@
             <h3><span id="bot-rts">0</span></h3>
           </div>
           <div class="w3-clear"></div>
-          <h4>Retweets</h4>
+          <h4 class="main-font" style="letter-spacing: 3px;">Retweets</h4>
         </div>
       </div>
       <div class="w3-quarter">
@@ -118,7 +118,7 @@
             <h3><span id="bot-pulls">0</span></h3>
           </div>
           <div class="w3-clear"></div>
-          <h4>Requests</h4>
+          <h4 class="main-font" style="letter-spacing: 3px;">Requests</h4>
         </div>
       </div>
       <div class="w3-quarter">
@@ -128,7 +128,7 @@
             <h3><span id="bot-efficiency-avg">0%</span></h3>
           </div>
           <div class="w3-clear"></div>
-          <h4>Efficiency</h4>
+          <h4 class="main-font" style="letter-spacing: 3px;">Efficiency</h4>
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@
             <tbody>
               <tr>
                 <th>
-                  <h5 style="text-align: left;">Server:</h5>
+                  <h5 style="text-align: left;" class="main-font">Server:</h5>
                 </th>
                 <td>
                   <span class="w3-yellow" id="server-status">NOT RUNNING</span>
@@ -156,7 +156,7 @@
               </tr>
               <tr>
                 <th>
-                  <h5 style="text-align: left;">Account:</h5>
+                  <h5 style="text-align: left;" class="main-font">Account:</h5>
                 </th>
                 <td>
                   <span class="w3-yellow" id="my-screen-name">N/A</span>
@@ -164,15 +164,15 @@
               </tr>
               <tr>
                 <th>
-                  <h5>Server Ping:</h5>
+                  <h5 style="text-align: left;" class="main-font">Server Ping:</h5>
                 </th>
                 <td>
-                  <span class="w3-grey" id="server-ping">N/A</span>
+                  <span class="w3-grey" class="main-font" id="server-ping">N/A</span>
                 </td>
               </tr>
               <tr>
                 <th>
-                  <h5 style="text-align: left;">Query Bot:</h5>
+                  <h5 style="text-align: left;" class="main-font">Query Bot:</h5>
                 </th>
                 <td>
                   <span class="w3-yellow" id="bot-status">NOT RUNNING</span>
@@ -180,7 +180,7 @@
               </tr>
               <tr>
                 <th>
-                  <h5 style="text-align: left;">Stream Bot:</h5>
+                  <h5 style="text-align: left;" class="main-font">Stream Bot:</h5>
                 </th>
                 <td>
                   <span class="w3-yellow" id="stream-status">NOT RUNNING</span>
@@ -193,25 +193,26 @@
     </div>
     
 <div class="w3-container">
-  <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Analytics - Performance</h4> 
+  <h4 style="font-weight: 600;" class="ocean">&nbsp;Analytics - Performance</h4> 
   <div id="analytics-automation-keep-rate" class="analytics-panels"></div>
   <div id="analytics-automation-likes-retweets" class="analytics-panels"></div>
 </div>
 
 <div class="w3-container">
-  <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Analytics - Interaction</u></h4>
+  <h4 style="font-weight: 600;" class="ocean">&nbsp;Analytics - Interaction</u></h4>
     <div id="analytics-interaction-followers" class="analytics-panels"></div>
 </div>
 
 <div class="w3-container">
-  <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Analytics - Usage</u></h4>
+  <h4 style="font-weight: 600;" class="ocean">&nbsp;Analytics - Usage</u></h4>
     <div id="analytics-usage-plot" class="analytics-panels"></div>
     <div id="analytics-usage-plot-24" class="analytics-panels"></div>
 </div>
 
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
-      <h4 style="font-weight: 600;text-align: center;" class="main-font ocean">&nbsp;Tako | An open source tool by Aero.</h4>
+      <h4 style="font-weight: 600;text-align: center;" class="tako-font">&nbsp;Tako | An open source tool by 
+        <a class="tako-font" target="_blank" href="https://twitter.com/rec0ndev">Aero</a>.</h4>
     </footer>
   
     <!-- End page content -->
@@ -260,7 +261,7 @@
                 <table class="soft-border-bottom-table">
                   <tbody>
                     <tr>
-                        <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Diagnostics & Info</h4>
+                        <h4 style="font-weight: 600;" class="ocean">&nbsp;Diagnostics & Info</h4>
                     </tr>
                     <tr>
                       <th>
@@ -380,7 +381,7 @@
             <div class="w3-modal-content" id="edit-modal-content">
                 <div class="bar-borders"></div>
                 <div class="w3-container">
-                    <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Edit Resources</h4>
+                    <h4 style="font-weight: 600;" class="ocean">&nbsp;Edit Resources</h4>
                 </div>
                 <div class="bar-borders"></div>
                 <div class="w3-container">
@@ -408,7 +409,7 @@
             <div class="w3-modal-content" id="constraints-modal-content">
                 <div class="bar-borders"></div>
                 <div class="w3-container">
-                    <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Edit Constraints</h4>
+                    <h4 style="font-weight: 600;" class="ocean">&nbsp;Edit Constraints</h4>
                     <table class="w3-table">
                         <tr>
                             <td>
@@ -495,7 +496,7 @@
                 <div class="bar-borders"></div>
                 <div class="w3-container">
                     
-                    <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Autonomous Interactions</h4>
+                    <h4 style="font-weight: 600;" class="ocean">&nbsp;Autonomous Interactions</h4>
 
                     <input type="checkbox" id="interaction-like" name="interaction-like" value="1" checked>
                     <label for="interaction-like">Like</label><br>
@@ -521,7 +522,7 @@
                 
 
                 <div class="w3-bar w3-container">
-                  <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Query Bot Control</h4>
+                  <h4 style="font-weight: 600;" class="ocean">&nbsp;Query Bot Control</h4>
                     <div class="w3-bar-item">
                         <button id="botStart" style="background-color: dodgerblue;border-radius: 4px;" class="w3-button w3-green main-font">Start</button>
                     </div>
@@ -536,7 +537,7 @@
               <hr class="soft-border-bottom">
 
               <div class="w3-bar w3-container">
-                <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Stream Bot Control</h4>
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Stream Bot Control</h4>
                   <div class="w3-bar-item">
                       <button id="streamStart" style="background-color: dodgerblue;border-radius: 4px;" class="w3-button w3-green main-font">Start</button>
                   </div>
@@ -551,7 +552,7 @@
               <hr class="soft-border-bottom">
 
               <div class="w3-bar w3-container"> 
-                <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Universal Bot Settings</h4> 
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Universal Bot Settings</h4> 
                   <div class="w3-bar-item">
                       <button id="edit-toggle" style="background-color: gold;border-radius: 4px;" class="w3-button main-font">Resources</button>
                   </div>
@@ -566,7 +567,7 @@
               <hr class="soft-border-bottom">
 
               <div class="w3-bar w3-container">
-                <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Universal API Settings</h4>
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Universal API Settings</h4>
                   <div class="w3-bar-item">
                       <button id="reAuth" style="background-color: dodgerblue;border-radius: 4px;" class="w3-button w3-blue main-font">Reset Auth</button>
                   </div>
@@ -587,7 +588,7 @@
               <div class="spacer-5"></div>
               <div class="spacer-5"></div>
               <div class="w3-container">
-                <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Logging</h4> 
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Logging</h4> 
                 <table id="log-table" class="cell-border"></table>
               </div>
               <div class="spacer-5"></div>
@@ -601,8 +602,8 @@
             <div class="w3-modal-content">
               <div class="bar-borders"></div>
               <div class="w3-container">
-                <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Settings</h4> 
-                <h4 style="cursor: not-allowed;">Darkmode
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Settings</h4> 
+                <h4 style="cursor: not-allowed;" class="main-font">Darkmode
                   <input type="checkbox" value="1" id="darkmode-tgl" disabled>
                 </h4>
               </div>
@@ -616,7 +617,7 @@
             <div class="w3-modal-content">
               <div class="bar-borders"></div>
               <div class="w3-container">
-                <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Scheduler</h4> 
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Scheduler</h4> 
                 <div id="tweet-scheduler-widget"></div>
               </div>
               <div class="bar-borders"></div>
@@ -629,8 +630,8 @@
             <div class="w3-modal-content">
               <div class="bar-borders"></div>
               <div class="w3-container">
-                <h4 style="font-weight: 600;" class="main-font ocean">&nbsp;Stream</h4> 
-                <h4>Currently Following Handles:</h4>
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Stream</h4> 
+                <h4 class="main-font">Currently Following Handles:</h4>
                   <div class="w3-bar-block" id="streamHandlesBlock">
                   </div>
                   <input type="text" class="w3-input" id="streamHandleInput" placeholder="Enter a valid Twitter Handle...">
