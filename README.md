@@ -124,9 +124,24 @@ Issue: Twitter API only includes some of the text of a tweet in API requests, la
 
 > Darkmode is disabled until I can make the time to fix it.
 
-> Some of the UI is inconsisten since rewiting the frontend, will fix ASAP.
 
-> Font is cool but unfortunately doesn't have proper lowercase letters, changing soon.
+
+## Changelog:
+
+#### v00.00.2x
+
+> __Follow__ is now an interaction option, allowing Tako users to automatically follow the author of Tweets interacted with.
+
+> Updated font.
+
+> `macros.Auth` is now used globally. This saves requests by authenticating at startup instead of each query. Stream, Scheduler & Query Bot now share the same Oauth instance.
+
+> Screenshot:
+![](https://github.com/hostinfodev/cdn/blob/main/img/tako_00_00_22.png?raw=true)
+
+
+
+
 
 
 
