@@ -18,6 +18,7 @@ class macros:
     followers       = 0
     retweets        = 0
     likes           = 0
+    follows         = 0
     acks            = 0
     totalPulls      = 0
     efficiencyAvg   = 0.00
@@ -186,7 +187,8 @@ class macros:
                 ["query_amount", int],
                 ["max_hashtags", int],
                 ["interaction-like", bool],
-                ["interaction-rt", bool]
+                ["interaction-rt", bool],
+                ["interaction-follow", bool]
             ]
 
         def set(key, value):
@@ -261,7 +263,31 @@ class macros:
             macros.Auth.auth.set_access_token(macros.Config.get()['token'], macros.Config.get()['token_secret'])
             macros.Auth.auth.secure = True
             macros.Auth.api         = API(macros.Auth.auth)    
-            #macros.Que.Alerts.alert("Authed To Twitter Successfully!")      
+            macros.Me.update()
+            macros.Que.Alerts.alert("Authenticated To Twitter Successfully!")  
+
+        @staticmethod
+        def unset():
+            macros.Auth.auth        = None
+            macros.Auth.api         = None   
+
+    class Me:
+
+        me = None
+
+        def update():
+            macros.Me.me = macros.Auth.api.me()
+            macros.followers = macros.Me.me.followers_count
+            macros.Que.Data.data.append({
+                "action": "dataUpdate",
+                "data": {
+                    "type": "me",
+                    "json": macros.Me.me._json
+                }
+            })
+
+
+
 
 
 

@@ -16,7 +16,7 @@ from scheduleBot import ScheduleBot
 from macros      import macros
 
 # START LOGGING
-basicConfig(filename="log/teko.log", level=DEBUG)
+basicConfig(filename="log/tako.log", level=DEBUG)
 
 # CONVENTIONAL BOT THREAD
 def botDaemon():
@@ -26,7 +26,7 @@ def botDaemon():
 def scheduleBotDaemon():
     ScheduleBot().run()
 
-# NOTE: STREAMBOT THREAD IS STARTED AS NEEDED
+# NOTE: STREAMBOT THREAD IS STARTED ONLY AS NEEDED
 
 # INITIALIZE OUR PSEUDO-NATIVE APP ENVORONMENT
 globalWebDriver = None
@@ -37,7 +37,11 @@ def browserDaemon():
         global globalWebDriver
 
         opt     = webdriver.ChromeOptions()
-        webCWD  = getcwd().replace('\\', '/')
+
+        webCWD  = getcwd()
+        if '\\' in webCWD:
+            webCWD  = getcwd().replace('\\', '/')
+            
         URL     = f"file:///{webCWD}/ui.html"
         # https://chromium.googlesource.com/chromium/src/+/refs/heads/main/chrome/common/chrome_switches.cc
         opt.add_argument("--app=" + URL)

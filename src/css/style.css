@@ -4,22 +4,22 @@
 }
 
 ::-webkit-scrollbar{
-    width: 13px;
-    height: 13px;
-    }
-    ::-webkit-scrollbar-thumb{
-    background: linear-gradient(180deg, #000000 30%,#1E90FF 70%);
-    border: 1.7px ridgergba(0, 0, 0, 0.2);
-    border-radius: 0px;
-    }
-    ::-webkit-scrollbar-thumb:hover{
-    background: #1E90FF;
-    }
-    ::-webkit-scrollbar-track{
-    background: #F0F0F0;
-    border: 1px outset rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0px 0px 0px 0px #F0F0F0;
-    }
+width: 13px;
+height: 13px;
+}
+::-webkit-scrollbar-thumb{
+background: linear-gradient(180deg, #000000 30%,#1E90FF 70%);
+border: 1.7px ridgergba(0, 0, 0, 0.2);
+border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover{
+background: #1E90FF;
+}
+::-webkit-scrollbar-track{
+background: #F0F0F0;
+border: 1px outset rgba(0, 0, 0, 0.2);
+box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+}
 
 
 .main-font{
@@ -52,12 +52,12 @@
 }
 
 .soft-border-bottom-table > tbody > tr > td{
-    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.180);
 }
 
 .soft-border-bottom-table > tbody > tr > th{
     text-align: left;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.180);
 }
 
 .main-section-borders{

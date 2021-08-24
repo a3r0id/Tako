@@ -50,16 +50,16 @@
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
     <div class="w3-container w3-row soft-border-bottom">
-<!--
+
         <div class="w3-col s4">
-        <img src="./img/tako_panel.png" class="w3-circle w3-margin-right" style="width:46px">
+        <img src="./img/tako_panel.png" id="avatar" class="w3-circle w3-margin-right" style="width:46px">
       </div>
--->
+
       <div class="w3-col s8 w3-bar">
         <span style="font-size: x-small;text-align: center;">&nbsp;&nbsp;&nbsp;Tako (Dev.) V00.00.02</span><br>
         <a href="https://github.com/hostinfodev/tako/blob/main/README.md#tako-basic-usage" target="_blank" class="w3-bar-item w3-button"><i class="fa fa-question-circle"></i></a>
         <a href="https://github.com/hostinfodev/tako" target="_blank" class="w3-bar-item w3-button"><i style="color: rgba(128, 0, 128, 0.57);" class="fa fa-github"></i></a>
-        <a href="https://twitter.com/" target="_blank" class="w3-bar-item w3-button"><i style="color: dodgerblue;" class="fa fa-twitter"></i></a>
+        <a href="https://twitter.com/" id="go-to-twitter" target="_blank" class="w3-bar-item w3-button"><i style="color: dodgerblue;" class="fa fa-twitter"></i></a>
       </div>
     </div>
     
@@ -139,12 +139,11 @@
           <h3><u>Websocket Log</u><span id="download-socket-logs" style="cursor: pointer;height:5px;top: 1px;margin:0 1px;padding-top:2px;" class="fa fa-fw fa-cloud-download w3-medium"></span></h3>
            <!--Message Logs-->
            <div class="w3-container" style="overflow-y: scroll;border: 1px solid rgba(0, 0, 0, 0.179);">
-             <div id="socket-log" style="height: 220px;"></div>
+             <div id="socket-log" style="height: 260px;"></div>
            </div>
         </div>
         <div class="w3-twothird">
           <h3><u>Status</u></h3>
-
           <table class="soft-border-bottom-table">
             <tbody>
               <tr>
@@ -153,6 +152,14 @@
                 </th>
                 <td>
                   <span class="w3-yellow" id="server-status">NOT RUNNING</span>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <h5 style="text-align: left;">Account:</h5>
+                </th>
+                <td>
+                  <span class="w3-yellow" id="my-screen-name">N/A</span>
                 </td>
               </tr>
               <tr>
@@ -493,7 +500,9 @@
                     <input type="checkbox" id="interaction-like" name="interaction-like" value="1" checked>
                     <label for="interaction-like">Like</label><br>
                     <input type="checkbox" id="interaction-rt" name="interaction-rt" value="1" checked>
-                    <label for="interaction-rt">Retweet</label><br><br>
+                    <label for="interaction-rt">Retweet</label><br>
+                    <input type="checkbox" id="interaction-follow" name="interaction-follow" value="1" checked>
+                    <label for="interaction-follow">Follow</label><br><br>
 
                 </div>
                 <div class="bar-borders"></div>

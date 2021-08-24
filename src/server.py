@@ -5,7 +5,6 @@ from macros import macros
 
 async def server(websocket, path): 
 
-
     # RESPOND AFTER SOCKET REGISTERED
     await websocket.send(dumps({
         "action": "dataUpdate",
@@ -43,7 +42,8 @@ async def server(websocket, path):
                 "query_amount": macros.Config.get()['query_amount'],
                 "max_hashtags": macros.Config.get()['max_hashtags'],
                 "interaction-like": macros.Config.get()['interaction-like'],
-                "interaction-rt": macros.Config.get()['interaction-rt']
+                "interaction-rt": macros.Config.get()['interaction-rt'],
+                "interaction-follow": macros.Config.get()['interaction-follow']
             }
         }
     }))
@@ -61,7 +61,8 @@ async def server(websocket, path):
         "data": {
             "type": "interactions",
             "like": macros.Config.get()['interaction-like'],
-            "rt":   macros.Config.get()['interaction-rt']
+            "rt":   macros.Config.get()['interaction-rt'],
+            "follow":   macros.Config.get()['interaction-follow']
         }
     }))       
 

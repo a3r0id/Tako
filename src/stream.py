@@ -126,8 +126,8 @@ class MyStreamListener(StreamListener):
                     macros.Que.log("Retweeted a Tweet from stream by @%s" % user['screen_name'])
                 except Exception as e:
                     macros.Que.log(f"<span style=\"color: red;\">[Stream Error] {str(e)}</span>")
-
-            # Do the damn thang, again
+            
+            # Do the damn thang, again, again
             if macros.Config.get()["interaction-like"]:
                 try:
                     macros.Auth.api.create_favorite(event['id'])  

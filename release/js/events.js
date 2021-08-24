@@ -107,6 +107,13 @@ window.updateInteractions = () => {
     {
         $('#interaction-rt').prop( "checked", false );
     }
+    if (macros.interactions_follow){
+        $('#interaction-follow').prop( "checked", true );
+    }
+    else
+    {
+        $('#interaction-follow').prop( "checked", false );
+    }
 };
 
 $('#interaction-like').on('input', (e) => 
@@ -146,6 +153,23 @@ $('#interaction-rt').on('change', (e) => {
     window.SocketLog.log(message);
 })
 
+$('#interaction-follow').on('change', (e) => {
+    if ($('#interaction-follow').is(':checked')){
+        macros.interactions_follow = true
+    }
+    else{
+        macros.interactions_follow = false
+    }  
+    let message = JSON.stringify(
+        {
+            action: "set",
+            setter: "interaction-follow",
+            value: macros.interactions_follow
+        }
+    );
+    window.sock.send(message);
+    window.SocketLog.log(message);
+})
 
 $('#interactions-toggle').on('click', (e) => {
     $('.w3-modal').hide();

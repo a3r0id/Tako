@@ -85,6 +85,10 @@ class Bot(object):
                         macros.totalPulls += 1
                         macros.retweets   += 1
 
+                    if macros.Config.get()["interaction-follow"]:
+                        macros.Auth.api.create_friendship(tweet.user.id)  
+                        macros.totalPulls += 1
+                        macros.follows    += 1  
 
 
             ### POST-QUERY STATS/REVIEW ###########
@@ -94,8 +98,7 @@ class Bot(object):
                 macros.efficiencyAvg = float(keepRate(macros.retweets, macros.totalPulls))
 
             # Check ourself once a query
-            me = macros.Auth.api.get_user(macros.Config.get()['myHandle'])
-            macros.followers = me.followers_count
+            macros.Me.update()
             macros.totalPulls += 1
 
 
@@ -149,7 +152,7 @@ class Bot(object):
                     "type": "totalPulls",
                     "x": [i[0] for i in t],
                     "y": [i[1] for i in t],
-                    "amount": sum([i[1] for i in t])
+                    "amount": [i[1] for i in t][len([i[1] for i in t]) - 1]
                 }
             })
             
@@ -166,7 +169,7 @@ class Bot(object):
                     "type": "totalPulls24",
                     "x": [i[0] for i in pullsBuffer],
                     "y": [i[1] for i in pullsBuffer],
-                    "amount": sum([i[1] for i in pullsBuffer])
+                    "amount": [i[1] for i in pullsBuffer][len([i[1] for i in pullsBuffer]) - 1]
                 }
             })
             ### END - POST-QUERY STATS/REVIEW ###########

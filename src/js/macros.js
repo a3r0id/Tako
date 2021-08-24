@@ -1,5 +1,6 @@
 
 let macros = {
+    me: {},
     retweets: 0,
     likes: 0,
     totalPulls: 0,
@@ -45,6 +46,7 @@ let macros = {
         query_amount: null,
         max_hashtags: null,
         interactions_like: null,
-        interactions_rt: null
+        interactions_rt: null,
+        interactions_follow: null
     }
 };

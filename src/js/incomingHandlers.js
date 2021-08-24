@@ -66,6 +66,14 @@ const incomingHandlers =
 
             case 'constraints':
                 macros.constraints = data.data;
+                for (let action of ["interaction-like", "interaction-rt", "interaction-follow"]){
+                    if (data[action]){
+                        $( "#" + action ).prop( "checked", true );
+                    }
+                    else{
+                        $( "#" + action ).prop( "checked", false );
+                    }
+                }
                 updateConstraints(data.data);
                 delete data;
                 break;
@@ -77,8 +85,9 @@ const incomingHandlers =
                 break;
 
             case 'interactions':
-                macros.interactions_like = data.like;
-                macros.interactions_rt   = data.rt;
+                macros.interactions_like     = data.like;
+                macros.interactions_rt       = data.rt;
+                macros.interactions_follow   = data.follow;
                 window.updateInteractions();
                 delete data;
                 break;
@@ -87,6 +96,16 @@ const incomingHandlers =
                 macros.streamFollowing = data.data;
                 window.StreamEditor.updateStream();
                 delete data;
+                break;
+
+            case 'me':
+                macros.me = data.json;
+                console.log(macros.me);
+                console.log(typeof macros.me);
+                delete data;
+                $('#avatar').attr("src", macros.me.profile_image_url_https);
+                $('#go-to-twitter').attr("href", macros.me.screen_name);
+                $('#my-screen-name').html(`<span class=\"w3-green\">${macros.me.screen_name}</span>`);
                 break;
 
             default:
