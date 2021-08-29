@@ -9,7 +9,7 @@
 # Features
 
 > ### Query Bot
-__Query Bot__ is a conventional Twitter Retweet/Like bot that uses hashtags to search for related Tweets then interacts with them. This is proven method to build a steady following.
+__Query Bot__ is a conventional Twitter Retweet/Like bot that uses hashtags to search for related Tweets then interacts with them. This is a proven method to build a steady following.
 
 > ### Stream Bot
 __Stream Bot__ will follow specific users and interact with their Tweets upon being posted. This is good for interacting with an influencer or your favorite people on Twitter.
@@ -34,6 +34,8 @@ If you'd like to keep your config in a different location than your runtime loca
 
 
 # Run Tako (Python Excutable Package | Windows 32bit+64bit Release)
+
+> Complete initial steps.
 
 > Copy `/release` to your intended runtime location.
 
