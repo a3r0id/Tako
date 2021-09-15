@@ -1,0 +1,4 @@
+---------ChromeDriver 93.0.4577.63 (2021-09-09)---------
+Supports Chrome version 93
+
+Download: https://chromedriver.storage.googleapis.com/index.html?path=93.0.4577.63/
