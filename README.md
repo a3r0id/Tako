@@ -1,4 +1,4 @@
-# Tako (Alpha Release)
+# Tako (Alpha Release) [Drivers are outdated]
 Tako is a Twitter bot that selectively retweets/favorites based on Twitter content that the bot finds useful. You can currate Tako's behavior and constraints from a comfortable user-interface that live right in your browser, thanks Tako's websocket server! This is just an alpha release as there are still many bugs and I have many big plans for future Tako releases including but not limited to: sentiment/spam analysis and much more!
 
 ![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/tako_panel.png)
