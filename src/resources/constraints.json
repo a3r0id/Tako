@@ -6,5 +6,6 @@
     "query_amount": 80,
     "max_hashtags": 10,
     "interaction-like": true,
-    "interaction-rt": true
+    "interaction-rt": true,
+    "interaction-follow": false
 }

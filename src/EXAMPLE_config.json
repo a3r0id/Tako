@@ -1,0 +1,10 @@
+{
+    "consumer": "TWITTER_API_KEY",
+    "consumer_secret":"TWITTER_API_KEY_SECRET",
+    "token": "TWITTER_AUTH_TOKEN",
+    "token_secret": "TWITTER_AUTH_TOKEN_SECRET",
+    "myHandle": "YOUR_TWITTER_HANDLE",
+    "server_port": 8401,
+    "server_adapter": "127.0.0.1",
+    "server_max_buffer": 9000000
+}

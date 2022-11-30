@@ -29,7 +29,7 @@ window.tweetScheduler =
 
 window.buildTweetScheduler = () => {
     let widget = $('#tweet-scheduler-widget');
-    let buffer = "<div class=\"w3-container\"> <h3 class=\"main-font\">My Tweets</h3> <table> ";
+    let buffer = "<div class=\"w3-container\"> <h3 class=\"main-font\">Scheduled Tweets</h3> <table> ";
     let index  = 0;
     for (let tweet of macros.myTweets){
         buffer += `
