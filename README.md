@@ -1,5 +1,5 @@
-# Tako (Alpha Release) [Drivers are outdated]
-Tako is a Twitter bot that selectively retweets/favorites based on Twitter content that the bot finds useful. You can currate Tako's behavior and constraints from a comfortable user-interface that live right in your browser, thanks Tako's websocket server! This is just an alpha release as there are still many bugs and I have many big plans for future Tako releases including but not limited to: sentiment/spam analysis and much more!
+# Tako
+Tako is a Twitter bot that selectively retweets/favorites based on Twitter content that the bot finds useful. You can curate Tako's behavior and constraints from a comfortable user-interface that live right in your browser, thanks Tako's websocket server! This is just an alpha release as there are still many bugs and I have many big plans for future Tako releases including but not limited to: sentiment/spam analysis and much more!
 
 ![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/tako_panel.png)
 
@@ -25,47 +25,15 @@ Tako features some basic analytics which give some insight into Tako's effective
 
 > Apply for and receive [Twitter API credentials](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api). 
 
-> Git install/Extract Tako repository to a comfortable location on your intended runtime device.
+> Clone Tako to a comfortable location on your intended runtime device.
+
+> Rename `EXAMPLE_config.json` to `config.json`.
 
 > Update your config (`config.json`) with your valid Twitter API credentials. (Read & write permissions)
-If you'd like to keep your config in a different location than your runtime location then simply add the path of your config to `config_location.txt`, this is where Tako will initially search for your config.
 
-> Move to `/src` and install `requirements.txt`.
-
-
-# Run Tako (Python Excutable Package | Windows 32bit+64bit Release)
-
-> Complete initial steps.
-
-> Copy `/release` to your intended runtime location.
-
-> Run Tako!
-
-
-# Build Tako (Python Excutable Package | Cross-Platform)
-
-> Complete initial steps.
-
-> Move to `/src/build_scripts` then run `build_tako.py`.
-This will create a new directory `src/dist` which will contain your build if all went correctly. You can move this folder to any location.
-
-> Update your config file with valid Twitter API credentials.
-Add the location of your `config.json` to `config_location.txt` if you'd like to keep your config somewhere besides Tako's working directory. 
-
-> Run Tako!
-Windows: `Tako.exe` / Unix: `Tako`
-
-
-# Run Tako Conventionally (Script | Cross-Platform)
-
-> Complete initial steps.
-
-> Add your intended credentials to `config.json`.
+> Move to `/src` and pip install `requirements.txt`.
 
 > Run `main.py`.
-
-> As instructed by `main.py`, double-click `ui.html` to open the user interface in your browser.
-
 
 # Tako Basic Usage
 
@@ -82,19 +50,19 @@ Windows: `Tako.exe` / Unix: `Tako`
 
 > __Hashtags__: The hashtags you add here will determine the Tweets your bot will interact with.
 
-> __Drop If Hashtag Includes__: Tako will ignore any Tweet that inludes any of these phrases in any of it's hashtags. (Keeps us from interacting with junk like #100daysofcode etc.). Should ALWAYS be lowercase as each hashtag will be searched in lowercase.
+> __Drop If Hashtag Includes__: Tako will ignore any Tweet that includes any of these substrings in any of it's hashtags. (Keeps us from interacting with junk like #100daysofcode etc.). Should ALWAYS be lowercase as each hashtag will be searched in lowercase.
 
-> __Drop If Tweet Includes__: Tako will ignore any Tweet that inludes any of these phrases within it's text. (Keeps us from interacting with junk like "check out my onlyfans + 100DaysOfCode + drug shop on the darknet" etc...). Should ALWAYS be lowercase as each tweet will be searched in lowercase.
-Issue: Twitter API only includes some of the text of a tweet in API requests, larger tweets may be truncated so this feature is not completely reliable.
+> __Drop If Tweet Includes__: Tako will ignore any Tweet that includes any of these substrings within it's text. This keeps us from interacting with junk tweets. Substrings should ALWAYS be lowercase as each tweet will be searched in lowercase.
+Issue: Twitter API only includes *some* of the text of a tweet in API requests, larger tweets may be truncated so this feature is not completely reliable.
 
 ### (Image) Editing Bot Resources
 ![](https://github.com/hostinfodev/cdn/blob/main/img/tako_resources_hashtags.png?raw=true)
 
 ## Bot Constraints:
 
-> __Max Dataset Length__: This is the maximum amount of datapoints to keep in our dataset files. This is where our anaytics come from and are stored. If you arent concerned about performance/storage issues (ie: arent on a slow device) then you can use a higher cap.
+> __Max Dataset Length__: This is the maximum amount of data points to keep in our dataset files. This is where our analytics come from and are stored. If you arent concerned about performance/storage issues (ie: aren't on a slow device) then you can use a higher cap.
 
-> __Sleep Time__: Amount of time (seconds) to sleep between querys.
+> __Sleep Time__: Amount of time (seconds) to sleep between queries.
 
 > __Required Retweets__: Amount of retweets a Tweet must have in order for us to interact with it.
 
@@ -126,9 +94,17 @@ Issue: Twitter API only includes some of the text of a tweet in API requests, la
 
 > Darkmode is disabled until I can make the time to fix it.
 
-
-
 ## Changelog:
+
+#### v00.00.8x
+
+> Resolved all known errors.
+
+> Removed dependency of chrome-driver for app mode (kiosk mode), Tako now automatically opens in your default browser. 
+
+> Removed config_location.txt, `config.json` is expected to be located in the root folder in any case.
+
+> Various UI changes.
 
 #### v00.00.2x
 
