@@ -1,4 +1,5 @@
-config.json
+src/config.json
+*config.json
 *.log
 todos.md
 __pycache__

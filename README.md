@@ -98,7 +98,7 @@ Issue: Twitter API only includes *some* of the text of a tweet in API requests, 
 
 #### v00.00.8x
 
-> Added Discord webhook support for stream listener. Forward tweets real-time to a Discord channel.
+> Added Discord webhook support for stream listener.
 
 > Resolved all known errors.
 
