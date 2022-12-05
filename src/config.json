@@ -1,0 +1,10 @@
+{
+    "consumer": "CDZ7YinrgGQKyOP1IEGx3swq9",
+    "consumer_secret":"vpoKjChM74H0X13c4xgJACYfhkr4VLZjb8kXbSe9ZuYhxIFqtU",
+    "token": "1219853635-b3wIkubJmd2GQ3P5GdWnEo5ILDsIIMK8JvS0uya",
+    "token_secret": "zkns4RpYONqeVjFrO2niVrKvZ5oEwiyNnjkGuIN1GqaxX",
+    "myHandle": "rec0nus",
+    "server_port": 8401,
+    "server_adapter": "127.0.0.1",
+    "server_max_buffer": 9000000
+}

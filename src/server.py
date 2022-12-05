@@ -73,6 +73,16 @@ async def server(websocket, path):
             "data": macros.Stream.get()
         }
     }))    
+    
+    await websocket.send(dumps({
+        "action": "dataUpdate",
+        "data": {
+            "type": "streamWebhook",
+            "data": {
+                "enabled": macros.Config.get()['interaction-stream-discord-webhook-enable'],
+                "url": macros.Config.get()['interaction-stream-discord-webhook-url']
+            }
+        }}))
 
     # MESSAGE LOOP
     async for message in websocket:
@@ -218,8 +228,21 @@ async def server(websocket, path):
                             "type": "streamFollowing",
                             "data": macros.Stream.get()
                         }
+                    })) 
+                    
+                if message['setter'] == "interaction-stream-discord-webhook-url":
+                    macros.Constraints.set(message['setter'], message['value'])
+                    await websocket.send(dumps({
+                        "action": "alert",
+                        "data": "Value Set!"
                     }))   
-
+                    
+                if message['setter'] == "interaction-stream-discord-webhook-enable":
+                    macros.Constraints.set(message['setter'], message['value'])
+                    await websocket.send(dumps({
+                        "action": "alert",
+                        "data": "Value Set!"
+                    }))   
 
             if message['action'] == "remove":
     

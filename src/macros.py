@@ -188,7 +188,9 @@ class macros:
                 ["max_hashtags", int],
                 ["interaction-like", bool],
                 ["interaction-rt", bool],
-                ["interaction-follow", bool]
+                ["interaction-follow", bool],
+                ["interaction-stream-discord-webhook-url", str],
+                ["interaction-stream-discord-webhook-enable", bool]
             ]
 
         def set(key, value):

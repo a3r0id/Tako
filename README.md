@@ -98,6 +98,8 @@ Issue: Twitter API only includes *some* of the text of a tweet in API requests, 
 
 #### v00.00.8x
 
+> Added Discord webhook support for stream listener. Forward tweets real-time to a Discord channel.
+
 > Resolved all known errors.
 
 > Removed dependency of chrome-driver for app mode (kiosk mode), Tako now automatically opens in your default browser. 
@@ -116,6 +118,7 @@ Issue: Twitter API only includes *some* of the text of a tweet in API requests, 
 
 > Screenshot:
 ![](https://github.com/hostinfodev/cdn/blob/main/img/tako_00_00_22.png?raw=true)
+
 
 
 
