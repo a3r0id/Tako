@@ -11,3 +11,4 @@ __pycache__
 *.egg
 *.eggs
 *.dist-info
+src/config.json
