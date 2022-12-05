@@ -294,3 +294,26 @@ $('#reAuth').on('click', () =>
     window.notify("Re-authenticated to Twitter API.");
 
 })
+
+$("#stream-webhook-url-submit").click(() => {
+    let url = $("#stream-webhook-url").val();
+    let message = JSON.stringify({
+        action: "set",
+        setter: "interaction-stream-discord-webhook-url",
+        value: url
+    });
+    window.sock.send(message);
+    window.SocketLog.log(message);
+    window.notify("Webhook URL set to " + url);
+});
+
+$("#stream-webhook-enable").on('change', () => {
+    let message = JSON.stringify({
+        action: "set",
+        setter: "interaction-stream-discord-webhook-enable",
+        value: $("#stream-webhook-enable").is(':checked')
+    });
+    window.sock.send(message);
+    window.SocketLog.log(message);
+    window.notify("Webhook enabled: " + $("#stream-webhook-enable").is(':checked'));
+});

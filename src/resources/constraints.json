@@ -7,5 +7,7 @@
     "max_hashtags": 10,
     "interaction-like": true,
     "interaction-rt": true,
-    "interaction-follow": false
+    "interaction-follow": false,
+    "interaction-stream-discord-webhook-url": "",
+    "interaction-stream-discord-webhook-enable": false
 }

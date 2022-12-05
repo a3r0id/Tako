@@ -52,10 +52,10 @@ class Bot(object):
                 if tags >= macros.Config.get()['max_hashtags']:
                     doDrop = True
 
-
                 # Check for overall bad keywords
                 for item in macros.DropPhrases.get():
-                    if (item.lower() in tweet.text.lower()):
+                    text_text = tweet.text if tweet.truncated is False else tweet.extended_tweet["full_text"]
+                    if (item.lower() in text_text.lower()):
                         doDrop = True
 
                 #Check cache to see if we have already interacted with this tweet.

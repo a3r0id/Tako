@@ -566,8 +566,30 @@
 
               <hr class="soft-border-bottom">
 
+              <div class="w3-bar w3-container"> 
+                
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Discord Webhook Settings</h4> 
+
+                <div>
+                  <!-- Enable checkbox -->
+                  <span><input type="checkbox" id="stream-webhook-enable" name="discord-enable" value="1"> &nbsp;Enable Discord Webhook (Stream Bot)</span>
+                </div>
+
+                <div>
+                  <div class="w3-bar-item">
+                    <button id="stream-webhook-url-submit" style="border-radius: 4px;" class="w3-button w3-green main-font">Set</button>
+                  </div>                  
+                  <div class="w3-bar-item">
+                      <input id="stream-webhook-url" style="border-radius: 4px;" class="w3-input main-font" placeholder="https://discord.com/api/webhooks/..."></input>
+                  </div>
+                </div>
+
+              </div>
+
+              <hr class="soft-border-bottom">
+
               <div class="w3-bar w3-container">
-                <h4 style="font-weight: 600;" class="ocean">&nbsp;Universal API Settings</h4>
+                <h4 style="font-weight: 600;" class="ocean">&nbsp;Universal API Control</h4>
                   <div class="w3-bar-item">
                       <button id="reAuth" style="background-color: dodgerblue;border-radius: 4px;" class="w3-button w3-blue main-font">Reset Auth</button>
                   </div>

@@ -108,6 +108,11 @@ const incomingHandlers =
                 $('#my-screen-name').html(`<span class=\"w3-green\">${macros.me.screen_name}</span>`);
                 break;
 
+            case 'streamWebhook':
+                $("#stream-webhook-enable").prop("checked", data.data.enabled);
+                $("#stream-webhook-url").val(data.data.url);
+                break;
+                
             default:
                 break;
         }

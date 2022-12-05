@@ -3,6 +3,8 @@ from tweepy import StreamListener, Stream
 from macros import macros
 from threading import Thread
 from json import loads, dumps
+
+from utilities.discordWebhook import sendDiscordWebhook
 # TODO
 # ADD CUSTOM RESPONSES TO BEING @'ed!
 
@@ -16,44 +18,36 @@ class MyStreamListener(StreamListener):
     return"""
 
     def on_event(self, status):
-        print("EVENT")
-        print(status)
+        #print(status)
         return
 
     def on_direct_message(self, status):
-        print("NEW DIRECT MESSAGE!")
-        print(status)
+        #print(status)
         return
 
     def on_friends(self, friends):
-        print("FRIENDS")
         print(friends)
         return
 
     def on_connect(self):
-        print("CONNECT")
         macros.Que.log("[Stream] Established & listening...")
         return
 
     def on_limit(self, track):
-        print("LIMIT")
         macros.Que.log(f"<span style=\"color: red;\">[Stream Limit Reached] Track: {str(track)}</span>")
         return
 
     def on_timeout(self):
-        print("TIMEOUT")
         macros.Stream.running = False
         macros.Que.log(f"[Stream] Stream timeout!")
         return
 
     def on_disconnect(self, notice):
-        print("DISCONNECT")
         macros.Stream.running = False
         macros.Que.log(f"[Stream] Stream disconnected by Twitter... Notice: {notice}")
         return False
         
     def on_warning(self, notice):
-        print("WARNING")
         macros.Que.log(f"[Stream] Stream will disconnected by Twitter... Warning: {notice}")
         return
 
@@ -67,13 +61,12 @@ class MyStreamListener(StreamListener):
     
     # ON STATUS - SEEMS TO NOT WORK WHEN OnData IS DEFINED AS WELL
     def on_status(self, status):
-        print("STATUS")
-        print(status)
+        #print(status)
         return
 
     # ON ERROR - KILLS STREAM
     def on_error(self, status_code):
-        print("ERROR")
+        print("STREAM ERROR: Code %s" % status_code)
         macros.Que.log(f"<span style=\"color: red;\">[Stream Error] Status Code: {status_code}</span>")
         macros.Que.log("[Stream] Killing Stream...")
         macros.Stream.currentStream = None
@@ -117,7 +110,6 @@ class MyStreamListener(StreamListener):
             if user['screen_name'] not in macros.Stream.get():
                 return 
 
-            # Do the damn thang
             if macros.Config.get()["interaction-rt"]:
                 try:
                     macros.Auth.api.retweet(event['id'])  
@@ -127,7 +119,6 @@ class MyStreamListener(StreamListener):
                 except Exception as e:
                     macros.Que.log(f"<span style=\"color: red;\">[Stream Error] {str(e)}</span>")
             
-            # Do the damn thang, again, again
             if macros.Config.get()["interaction-like"]:
                 try:
                     macros.Auth.api.create_favorite(event['id'])  
@@ -136,6 +127,18 @@ class MyStreamListener(StreamListener):
                     macros.Que.log("Liked a Tweet from stream by @%s" % user['screen_name'])
                 except Exception as e:
                     macros.Que.log(f"<span style=\"color: red;\">[Stream Error] {str(e)}</span>")
+                    
+            if macros.Config.get()["interaction-stream-discord-webhook-enable"]:
+                url = f"https://twitter.com/{user['screen_name']}/status/{event['id_str']}"
+                try:
+                    r = sendDiscordWebhook(
+                        macros.Config.get()["interaction-stream-discord-webhook-url"],
+                        url
+                        )
+                    macros.Que.log(f"<span style=\"color: green;\">[Discord Webhook] {url} -> {r.status_code}</span>")   
+                    macros.Que.Alerts.alert(f"Sent Discord Webhook to {macros.Config.get()['interaction-stream-discord-webhook-url']}")     
+                except Exception as e:
+                    macros.Que.log(f"<span style=\"color: green;\">[Discord Webhook] {url} -> ERROR</span>")
         return
 
 class Streamer(object):
