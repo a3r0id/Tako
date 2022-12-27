@@ -1,7 +1,10 @@
 # Tako
 Tako is a Twitter bot that selectively retweets/favorites based on Twitter content that the bot finds useful. You can curate Tako's behavior and constraints from a comfortable user-interface that runs right in your browser.
 
-## __Known Issue:__ *For some reason, `py-notifier` was added to the requirements as "pynotifier", which is not a vaild distribution, to fix this use `pip install py-notifier`*
+## __Known Issues:__
+> *For some reason, `py-notifier` was added to the requirements as "pynotifier", which is not a vaild distribution, to fix this use `pip install py-notifier`*
+
+> *Tweepy should be version `tweepy==3.10.0`*
 
 ![](https://raw.githubusercontent.com/hostinfodev/cdn/main/img/tako_panel.png)
 
