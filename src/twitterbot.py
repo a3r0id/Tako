@@ -54,7 +54,10 @@ class Bot(object):
 
                 # Check for overall bad keywords
                 for item in macros.DropPhrases.get():
-                    text_text = tweet.text if tweet.truncated is False else tweet.extended_tweet["full_text"]
+                    try:
+                        text_text = tweet.text if tweet.truncated is False else tweet.extended_tweet["full_text"]
+                    except:
+                        text_text = tweet.text
                     if (item.lower() in text_text.lower()):
                         doDrop = True
 

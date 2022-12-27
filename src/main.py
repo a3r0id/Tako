@@ -15,6 +15,13 @@ from scheduleBot import ScheduleBot
 from macros      import macros
 from webbrowser  import open_new_tab
 from os.path     import join as pjoin
+from os          import mkdir
+
+# if /log does not exist, create it
+try:
+    mkdir("log")
+except FileExistsError:
+    pass
 
 # START LOGGING
 basicConfig(filename="log/tako.log", level=DEBUG)
